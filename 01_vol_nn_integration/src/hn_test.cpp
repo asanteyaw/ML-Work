@@ -1,9 +1,9 @@
-#include "ATen/core/TensorBody.h"
-#include "dataframe.h"
-#include "HNModel.h"
-#include "utils.h"
-#include <torch/torch.h>
 #include <iostream>
+#include <torch/torch.h>
+#include "dataframe.h"
+#include "GARCH_Volatility.h"
+#include "utils.h"
+
 
 using namespace pluss::table;
 
@@ -16,7 +16,7 @@ int main(){
   // Read CSV file
   auto returns_df = DataFrame::load("csv", "../all_data/exreturns.csv")->to(device);
   auto options_df = DataFrame::load("csv", "../all_data/options.csv")->to(device);
-  auto noise_mat = DataFrame::read_matrix("../all_data/sample_3.csv");
+  auto noise_mat = DataFrame::read_matrix("../all_data/sample_1.csv");
   
   // filter returns
   torch::Tensor ret_condition = (returns_df->get_col("Date") >= 19960101 & returns_df->get_col("Date") <= 20191231);
@@ -25,8 +25,8 @@ int main(){
   // Filter Options
   torch::Tensor op_condition = (options_df->get_col("Date") >= 20150101 & options_df->get_col("Date") <= 20191231);
   options_df = options_df->loc(op_condition);
-  op_condition = (options_df->get_col("bDTM") >= 20);
-  options_df = options_df->loc(op_condition);
+  // op_condition = (options_df->get_col("bDTM") >= 20);
+  // options_df = options_df->loc(op_condition);
 
   auto returns = returns_df->get_col("exret");
   
@@ -45,9 +45,9 @@ int main(){
   ub = torch::div(ub, scaler);
   
   // Initialize the Heston and Nandi model
-  auto model = HNModel(vol_type, scaled_params, lb, ub, scaler);
-  model->to(device);
-  torch::optim::Adam optimizer(model->parameters(), torch::optim::AdamOptions(0.001));
+  auto model = garch_type_model::HNModel(scaled_params);
+  model.to(device);
+  torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(0.001));
   
   // std::tie(model, loss_vals) = train_model(model, neg_log_likelihood, optimizer, num_epochs, {returns,});
 
@@ -65,8 +65,8 @@ int main(){
   {
       torch::NoGradGuard no_grad;
       torch::load(model, "../models/model_hn19.pt");
-      std::cout << model->parameters() << "\n";
-      model->eval();
+      std::cout << model.parameters() << "\n";
+      model.eval();
      
       // monte carlo simulation
       auto [approx_ivrmse, ivrmse] = rnIVRMSE(model, returns_df, options_df, shock);

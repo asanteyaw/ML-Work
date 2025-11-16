@@ -3,7 +3,6 @@
 #include <ATen/ops/stack.h>
 #include <c10/util/Exception.h>
 #include <torch/torch.h>
-#include "RNN_Functionals.h"
 #include <vector>
 #include <tuple>
 #include <memory>
@@ -54,14 +53,12 @@ class HNModel : public GARCHModel {
 public:
     torch::Tensor omega, alpha, phi, lamda, gamma;
     
-    HNModel(double omega_val, double alpha_val, double phi_val, 
-                     double lambda_val, double gamma_val,
-                     const torch::TensorOptions& options = torch::kFloat32)
-        : omega(register_parameter("omega", torch::tensor(omega_val, options)))
-        , alpha(register_parameter("alpha",torch::tensor(alpha_val, options)))
-        , phi(register_parameter("phi",torch::tensor(phi_val, options)))
-        , lamda(register_parameter("lamda",torch::tensor(lambda_val, options)))
-        , gamma(register_parameter("gamma",torch::tensor(gamma_val, options))) {}
+    HNModel(torch::Tensor vol_params)
+        : omega(register_parameter("omega",vol_params[0]))
+        , alpha(register_parameter("alpha",vol_params[1]))
+        , phi(register_parameter("phi",vol_params[2]))
+        , lamda(register_parameter("lamda",vol_params[3]))
+        , gamma(register_parameter("gamma1",vol_params[4])) {}
     
     torch::Tensor update_variance(const torch::Tensor& h_t, const torch::Tensor& z_t) override {
         // h_{t+1} = ω̄ + φ(h_t - ω̄) + α(z_t² - 1 - 2γ√h_t z_t)
@@ -144,18 +141,15 @@ public:
     torch::Tensor omega, alpha, phi, lamda, gamma1, gamma2, vphi, rho;
     torch::Tensor q_t; // Long-run component state
     
-    CHNModel(double omega_val, double alpha_val, double phi_val, 
-                             double lamda_val, double gamma1_val, double gamma2_val,
-                             double vphi_val, double rho_val,
-                             const torch::TensorOptions& options = torch::kFloat32)
-        : omega(register_parameter("omega",torch::tensor(omega_val, options)))
-        , alpha(register_parameter("alpha",torch::tensor(alpha_val, options)))
-        , phi(register_parameter("phi",torch::tensor(phi_val, options)))
-        , lamda(register_parameter("lamda",torch::tensor(lamda_val, options)))
-        , gamma1(register_parameter("gamma1",torch::tensor(gamma1_val, options)))
-        , gamma2(register_parameter("gamma2",torch::tensor(gamma2_val, options)))
-        , vphi(register_parameter("vphi",torch::tensor(vphi_val, options)))
-        , rho(register_parameter("rho",torch::tensor(rho_val, options))) {}
+    CHNModel(torch::Tensor vol_params)
+        : omega(register_parameter("omega",vol_params[0]))
+        , alpha(register_parameter("alpha",vol_params[1]))
+        , phi(register_parameter("phi",vol_params[2]))
+        , lamda(register_parameter("lamda",vol_params[3]))
+        , gamma1(register_parameter("gamma1",vol_params[4]))
+        , gamma2(register_parameter("gamma2",vol_params[5]))
+        , vphi(register_parameter("vphi",vol_params[6]))
+        , rho(register_parameter("rho",vol_params[7])) {}
     
     std::pair<torch::Tensor, torch::Tensor> update_variance_components(
         const torch::Tensor& h_t, const torch::Tensor& qt_1, const torch::Tensor& z_t) {

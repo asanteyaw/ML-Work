@@ -1,8 +1,8 @@
-#include "dataframe.h"
-#include "CHNModel.h"
-#include "utils.h"
-#include <torch/torch.h>
 #include <iostream>
+#include <torch/torch.h>
+#include "dataframe.h"
+#include "GARCH_Volatility.h"
+#include "utils.h"
 
 using namespace pluss::table;
 
@@ -15,7 +15,7 @@ int main(){
   // Read CSV file
   auto returns_df = DataFrame::load("csv", "../all_data/exreturns.csv")->to(device);
   auto options_df = DataFrame::load("csv", "../all_data/options.csv")->to(device);
-  auto noise_mat = DataFrame::read_matrix("../all_data/sample_3.csv");
+  auto noise_mat = DataFrame::read_matrix("../all_data/sample_1.csv");
   
   // filter returns
   torch::Tensor ret_condition = (returns_df->get_col("Date") >= 19960101 & returns_df->get_col("Date") <= 20191231);
