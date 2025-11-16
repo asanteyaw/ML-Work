@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/opt/homebrew/include",  // Homebrew headers
+                // "/usr/local/include",
+                "${workspaceFolder}/dataframe/include",
+                "${workspaceFolder}/dataframe/src",
+                "~/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include",
+                "~/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include",
+                "~/software/miniconda3/envs/cpp_env/include/python3.12",
+                "/Users/yawasante/software/miniconda3/envs/cpp_env/lib/clang/18/include",
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
+            ],
+            "defines": [
+                "_GLIBCXX_USE_CXX11_ABI=0"  // Torch ABI compatibility
+            ],
+            "compilerPath": "~/software/miniconda3/envs/cpp_env/bin/clang++",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "macos-clang-arm64",
+            "compileCommands": "${workspaceFolder}/dataframe/build/compile_commands.json"
+        }
+    ],
+    "version": 4
+}

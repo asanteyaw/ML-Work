@@ -1,0 +1,555 @@
+Current working directory is /home/yaw.asomani/cxx/second_paper/options/in_sample/RealEGARCH
+Starting run at: Fri Apr 18 16:56:24 MDT 2025
+[ 48%] Built target optim
+[ 62%] Built target dataframe
+[ 65%] Building CXX object CMakeFiles/realegarch_lib.dir/src/bsIV.cpp.o
+[ 68%] Linking CXX static library librealegarch_lib.a
+[ 79%] Built target realegarch_lib
+[ 82%] Linking CXX executable ar_test
+[ 86%] Built target ar_test
+[ 89%] Building CXX object CMakeFiles/const_test.dir/src/const_test.cpp.o
+[ 93%] Linking CXX executable const_test
+[ 93%] Built target const_test
+[ 96%] Linking CXX executable gru_test
+[100%] Built target gru_test
+CUDA available. Training on GPU.
+Training Autoregression Model
+About to call fminsearch
+IVRMSE: 0.0569182
+[ CUDAFloatType{} ]
+IVRMSE: 0.055108
+[ CUDAFloatType{} ]
+IVRMSE: 0.0584446
+[ CUDAFloatType{} ]
+IVRMSE: 0.0560071
+[ CUDAFloatType{} ]
+IVRMSE: 0.0570535
+[ CUDAFloatType{} ]
+Iteration   Func-count     f(x)         Procedure
+    1              5       -17507.2   initial simplex
+IVRMSE: 0.0542204
+[ CUDAFloatType{} ]
+IVRMSE: 0.0521159
+[ CUDAFloatType{} ]
+    2              7       -18167.8   expand
+IVRMSE: 0.0530143
+[ CUDAFloatType{} ]
+    3              8       -18167.8   reflect
+IVRMSE: 0.0511214
+[ CUDAFloatType{} ]
+IVRMSE: 0.048087
+[ CUDAFloatType{} ]
+    4             10       -19119.8   expand
+IVRMSE: 0.0479646
+[ CUDAFloatType{} ]
+IVRMSE: 0.0439888
+[ CUDAFloatType{} ]
+    5             12       -20173.9   expand
+IVRMSE: 0.0434512
+[ CUDAFloatType{} ]
+IVRMSE: 0.0405486
+[ CUDAFloatType{} ]
+    6             14       -21137.5   expand
+IVRMSE: 0.0403134
+[ CUDAFloatType{} ]
+IVRMSE: 0.0432815
+[ CUDAFloatType{} ]
+    7             16       -21206.3   reflect
+IVRMSE: 0.043228
+[ CUDAFloatType{} ]
+    8             17       -21206.3   reflect
+IVRMSE: 0.0449567
+[ CUDAFloatType{} ]
+IVRMSE: 0.041309
+[ CUDAFloatType{} ]
+    9             19       -21206.3   contract outside
+IVRMSE: 0.0495476
+[ CUDAFloatType{} ]
+IVRMSE: 0.0407976
+[ CUDAFloatType{} ]
+   10             21       -21206.3   contract inside
+IVRMSE: 0.041893
+[ CUDAFloatType{} ]
+IVRMSE: 0.0405199
+[ CUDAFloatType{} ]
+   11             23       -21206.3   contract outside
+IVRMSE: 0.0443887
+[ CUDAFloatType{} ]
+IVRMSE: 0.04026
+[ CUDAFloatType{} ]
+   12             25         -21222   contract inside
+IVRMSE: 0.0404161
+[ CUDAFloatType{} ]
+   13             26         -21222   reflect
+IVRMSE: 0.0397357
+[ CUDAFloatType{} ]
+IVRMSE: 0.0393076
+[ CUDAFloatType{} ]
+   14             28       -21505.3   expand
+IVRMSE: 0.0409842
+[ CUDAFloatType{} ]
+IVRMSE: 0.040078
+[ CUDAFloatType{} ]
+   15             30       -21505.3   contract inside
+IVRMSE: 0.0398721
+[ CUDAFloatType{} ]
+   16             31       -21505.3   reflect
+IVRMSE: 0.0392352
+[ CUDAFloatType{} ]
+IVRMSE: 0.0387295
+[ CUDAFloatType{} ]
+   17             33       -21680.6   expand
+IVRMSE: 0.0392712
+[ CUDAFloatType{} ]
+   18             34       -21680.6   reflect
+IVRMSE: 0.0382917
+[ CUDAFloatType{} ]
+IVRMSE: 0.0375334
+[ CUDAFloatType{} ]
+   19             36       -22051.8   expand
+IVRMSE: 0.0373799
+[ CUDAFloatType{} ]
+IVRMSE: 0.0362918
+[ CUDAFloatType{} ]
+   20             38       -22449.9   expand
+IVRMSE: 0.036707
+[ CUDAFloatType{} ]
+   21             39       -22449.9   reflect
+IVRMSE: 0.0356881
+[ CUDAFloatType{} ]
+IVRMSE: 0.0344872
+[ CUDAFloatType{} ]
+   22             41       -23053.4   expand
+IVRMSE: 0.0346433
+[ CUDAFloatType{} ]
+   23             42       -23053.4   reflect
+IVRMSE: 0.0331457
+[ CUDAFloatType{} ]
+IVRMSE: 0.0311931
+[ CUDAFloatType{} ]
+   24             44       -24241.3   expand
+IVRMSE: 0.0315916
+[ CUDAFloatType{} ]
+   25             45       -24241.3   reflect
+IVRMSE: 0.0303512
+[ CUDAFloatType{} ]
+IVRMSE: 0.0281653
+[ CUDAFloatType{} ]
+   26             47       -25449.6   expand
+IVRMSE: 0.0286138
+[ CUDAFloatType{} ]
+   27             48       -25449.6   reflect
+IVRMSE: 0.0285794
+[ CUDAFloatType{} ]
+   28             49       -25449.6   reflect
+IVRMSE: 0.0280505
+[ CUDAFloatType{} ]
+IVRMSE: 0.048711
+[ CUDAFloatType{} ]
+   29             51       -25497.9   reflect
+IVRMSE: 0.0466176
+[ CUDAFloatType{} ]
+IVRMSE: 0.0289477
+[ CUDAFloatType{} ]
+   30             53       -25497.9   contract inside
+IVRMSE: 0.02742
+[ CUDAFloatType{} ]
+IVRMSE: 0.0466176
+[ CUDAFloatType{} ]
+   31             55       -25766.9   reflect
+IVRMSE: 0.0609318
+[ CUDAFloatType{} ]
+IVRMSE: 0.0281879
+[ CUDAFloatType{} ]
+   32             57       -25766.9   contract inside
+IVRMSE: 0.0277505
+[ CUDAFloatType{} ]
+   33             58       -25766.9   reflect
+IVRMSE: 0.0344796
+[ CUDAFloatType{} ]
+IVRMSE: 0.0281195
+[ CUDAFloatType{} ]
+   34             60       -25766.9   contract inside
+IVRMSE: 0.0274644
+[ CUDAFloatType{} ]
+   35             61       -25766.9   reflect
+IVRMSE: 0.0328234
+[ CUDAFloatType{} ]
+IVRMSE: 0.0281647
+[ CUDAFloatType{} ]
+IVRMSE: 0.0274142
+[ CUDAFloatType{} ]
+IVRMSE: 0.0276142
+[ CUDAFloatType{} ]
+IVRMSE: 0.0277927
+[ CUDAFloatType{} ]
+IVRMSE: 0.0281686
+[ CUDAFloatType{} ]
+   36             67       -25769.4   shrink
+IVRMSE: 0.027508
+[ CUDAFloatType{} ]
+   37             68       -25769.4   reflect
+IVRMSE: 0.0272151
+[ CUDAFloatType{} ]
+IVRMSE: 0.0289659
+[ CUDAFloatType{} ]
+   38             70       -25855.6   reflect
+IVRMSE: 0.0297741
+[ CUDAFloatType{} ]
+IVRMSE: 0.0273922
+[ CUDAFloatType{} ]
+   39             72       -25855.6   contract inside
+IVRMSE: 0.0278507
+[ CUDAFloatType{} ]
+IVRMSE: 0.027145
+[ CUDAFloatType{} ]
+   40             74       -25886.2   contract inside
+IVRMSE: 0.0271905
+[ CUDAFloatType{} ]
+   41             75       -25886.2   reflect
+IVRMSE: 0.027295
+[ CUDAFloatType{} ]
+   42             76       -25886.2   reflect
+IVRMSE: 0.0296976
+[ CUDAFloatType{} ]
+IVRMSE: 0.0271473
+[ CUDAFloatType{} ]
+   43             78       -25886.2   contract inside
+IVRMSE: 0.0272973
+[ CUDAFloatType{} ]
+IVRMSE: 0.0271661
+[ CUDAFloatType{} ]
+   44             80       -25886.2   contract inside
+IVRMSE: 0.0271187
+[ CUDAFloatType{} ]
+IVRMSE: 0.027177
+[ CUDAFloatType{} ]
+   45             82       -25897.6   reflect
+IVRMSE: 0.0271422
+[ CUDAFloatType{} ]
+   46             83       -25897.6   reflect
+IVRMSE: 0.027314
+[ CUDAFloatType{} ]
+IVRMSE: 0.0271044
+[ CUDAFloatType{} ]
+   47             85       -25903.9   contract inside
+IVRMSE: 0.0271249
+[ CUDAFloatType{} ]
+   48             86       -25903.9   reflect
+IVRMSE: 0.0271063
+[ CUDAFloatType{} ]
+   49             87       -25903.9   reflect
+IVRMSE: 0.0271395
+[ CUDAFloatType{} ]
+IVRMSE: 0.0271072
+[ CUDAFloatType{} ]
+   50             89       -25903.9   contract outside
+IVRMSE: 0.0271113
+[ CUDAFloatType{} ]
+   51             90       -25903.9   reflect
+IVRMSE: 0.0270851
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270962
+[ CUDAFloatType{} ]
+   52             92       -25912.3   reflect
+IVRMSE: 0.0271331
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270942
+[ CUDAFloatType{} ]
+   53             94       -25912.3   contract inside
+IVRMSE: 0.0271085
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270928
+[ CUDAFloatType{} ]
+   54             96       -25912.3   contract inside
+IVRMSE: 0.0271283
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270922
+[ CUDAFloatType{} ]
+   55             98       -25912.3   contract inside
+IVRMSE: 0.0270942
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270886
+[ CUDAFloatType{} ]
+   56            100       -25912.3   contract outside
+IVRMSE: 0.0270876
+[ CUDAFloatType{} ]
+   57            101       -25912.3   reflect
+IVRMSE: 0.0270899
+[ CUDAFloatType{} ]
+   58            102       -25912.3   reflect
+IVRMSE: 0.0270861
+[ CUDAFloatType{} ]
+   59            103       -25912.3   reflect
+IVRMSE: 0.0270916
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270856
+[ CUDAFloatType{} ]
+   60            105       -25912.3   contract inside
+IVRMSE: 0.0270972
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270846
+[ CUDAFloatType{} ]
+   61            107       -25912.5   contract inside
+IVRMSE: 0.0270858
+[ CUDAFloatType{} ]
+   62            108       -25912.5   reflect
+IVRMSE: 0.0270891
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270844
+[ CUDAFloatType{} ]
+   63            110       -25912.6   contract inside
+IVRMSE: 0.0270875
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270841
+[ CUDAFloatType{} ]
+   64            112       -25912.8   contract inside
+IVRMSE: 0.0270837
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270864
+[ CUDAFloatType{} ]
+   65            114       -25912.9   reflect
+IVRMSE: 0.0270843
+[ CUDAFloatType{} ]
+   66            115       -25912.9   reflect
+IVRMSE: 0.0270845
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270836
+[ CUDAFloatType{} ]
+   67            117       -25912.9   contract outside
+IVRMSE: 0.0270831
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270833
+[ CUDAFloatType{} ]
+   68            119       -25913.2   reflect
+IVRMSE: 0.0270843
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270833
+[ CUDAFloatType{} ]
+   69            121       -25913.2   contract inside
+IVRMSE: 0.0270827
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270827
+[ CUDAFloatType{} ]
+   70            123       -25913.4   reflect
+IVRMSE: 0.0270852
+[ CUDAFloatType{} ]
+IVRMSE: 0.027083
+[ CUDAFloatType{} ]
+   71            125       -25913.4   contract inside
+IVRMSE: 0.0270827
+[ CUDAFloatType{} ]
+   72            126       -25913.4   reflect
+IVRMSE: 0.0270825
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270834
+[ CUDAFloatType{} ]
+   73            128       -25913.4   reflect
+IVRMSE: 0.0270833
+[ CUDAFloatType{} ]
+IVRMSE: 0.027083
+[ CUDAFloatType{} ]
+   74            130       -25913.4   contract inside
+IVRMSE: 0.027082
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270818
+[ CUDAFloatType{} ]
+   75            132       -25913.7   expand
+IVRMSE: 0.0270818
+[ CUDAFloatType{} ]
+   76            133       -25913.7   reflect
+IVRMSE: 0.0270819
+[ CUDAFloatType{} ]
+   77            134       -25913.7   reflect
+IVRMSE: 0.0270819
+[ CUDAFloatType{} ]
+   78            135       -25913.7   reflect
+IVRMSE: 0.0270809
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270806
+[ CUDAFloatType{} ]
+   79            137       -25914.3   expand
+IVRMSE: 0.0270812
+[ CUDAFloatType{} ]
+   80            138       -25914.3   reflect
+IVRMSE: 0.0270813
+[ CUDAFloatType{} ]
+   81            139       -25914.3   reflect
+IVRMSE: 0.0270808
+[ CUDAFloatType{} ]
+   82            140       -25914.3   reflect
+IVRMSE: 0.0270794
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270785
+[ CUDAFloatType{} ]
+   83            142       -25915.2   expand
+IVRMSE: 0.0270779
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270768
+[ CUDAFloatType{} ]
+   84            144       -25915.9   expand
+IVRMSE: 0.0270786
+[ CUDAFloatType{} ]
+   85            145       -25915.9   reflect
+IVRMSE: 0.0270765
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270782
+[ CUDAFloatType{} ]
+   86            147         -25916   reflect
+IVRMSE: 0.0270137
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270114
+[ CUDAFloatType{} ]
+   87            149       -25944.6   expand
+IVRMSE: 0.0270132
+[ CUDAFloatType{} ]
+   88            150       -25944.6   reflect
+IVRMSE: 0.0270115
+[ CUDAFloatType{} ]
+   89            151       -25944.6   reflect
+IVRMSE: 0.0270103
+[ CUDAFloatType{} ]
+IVRMSE: 0.0270096
+[ CUDAFloatType{} ]
+   90            153       -25945.3   expand
+IVRMSE: 0.0270044
+[ CUDAFloatType{} ]
+IVRMSE: 0.026999
+[ CUDAFloatType{} ]
+   91            155         -25950   expand
+IVRMSE: 0.0270025
+[ CUDAFloatType{} ]
+   92            156         -25950   reflect
+IVRMSE: 0.0270018
+[ CUDAFloatType{} ]
+   93            157         -25950   reflect
+IVRMSE: 0.026997
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269926
+[ CUDAFloatType{} ]
+   94            159       -25952.8   expand
+IVRMSE: 0.0269852
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269743
+[ CUDAFloatType{} ]
+   95            161       -25960.8   expand
+IVRMSE: 0.026978
+[ CUDAFloatType{} ]
+   96            162       -25960.8   reflect
+IVRMSE: 0.0269747
+[ CUDAFloatType{} ]
+   97            163       -25960.8   reflect
+IVRMSE: 0.0269785
+[ CUDAFloatType{} ]
+   98            164       -25960.8   reflect
+IVRMSE: 0.0269588
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269464
+[ CUDAFloatType{} ]
+   99            166       -25973.1   expand
+IVRMSE: 0.0269696
+[ CUDAFloatType{} ]
+  100            167       -25973.1   reflect
+IVRMSE: 0.0269514
+[ CUDAFloatType{} ]
+  101            168       -25973.1   reflect
+IVRMSE: 0.0269421
+[ CUDAFloatType{} ]
+IVRMSE: 0.026935
+[ CUDAFloatType{} ]
+  102            170       -25978.1   expand
+IVRMSE: 0.0269285
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269349
+[ CUDAFloatType{} ]
+  103            172       -25980.9   reflect
+IVRMSE: 0.0269529
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269329
+[ CUDAFloatType{} ]
+  104            174       -25980.9   contract outside
+IVRMSE: 0.02693
+[ CUDAFloatType{} ]
+  105            175       -25980.9   reflect
+IVRMSE: 0.0269273
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269465
+[ CUDAFloatType{} ]
+  106            177       -25981.4   reflect
+IVRMSE: 0.0269491
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269275
+[ CUDAFloatType{} ]
+  107            179       -25981.4   contract inside
+IVRMSE: 0.0269271
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269393
+[ CUDAFloatType{} ]
+  108            181       -25981.5   reflect
+IVRMSE: 0.0269328
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269258
+[ CUDAFloatType{} ]
+  109            183       -25982.1   contract inside
+IVRMSE: 0.0269339
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269249
+[ CUDAFloatType{} ]
+  110            185       -25982.5   contract inside
+IVRMSE: 0.0269303
+[ CUDAFloatType{} ]
+IVRMSE: 0.026925
+[ CUDAFloatType{} ]
+  111            187       -25982.5   contract inside
+IVRMSE: 0.0269275
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269256
+[ CUDAFloatType{} ]
+  112            189       -25982.5   contract inside
+IVRMSE: 0.0269286
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269247
+[ CUDAFloatType{} ]
+  113            191       -25982.6   contract inside
+IVRMSE: 0.0269264
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269246
+[ CUDAFloatType{} ]
+  114            193       -25982.6   contract inside
+IVRMSE: 0.0269261
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269244
+[ CUDAFloatType{} ]
+  115            195       -25982.7   contract inside
+IVRMSE: 0.0269243
+[ CUDAFloatType{} ]
+IVRMSE: 0.026926
+[ CUDAFloatType{} ]
+  116            197       -25982.8   reflect
+IVRMSE: 0.0269271
+[ CUDAFloatType{} ]
+IVRMSE: 0.026924
+[ CUDAFloatType{} ]
+  117            199       -25982.9   contract inside
+IVRMSE: 0.0269246
+[ CUDAFloatType{} ]
+IVRMSE: 0.0269244
+[ CUDAFloatType{} ]
+  118            201       -25982.9   contract outside
+terminate called after throwing an instance of 'c10::Error'
+  what():  a Tensor with 4 elements cannot be converted to Scalar
+Exception raised from item at ../aten/src/ATen/native/Scalar.cpp:19 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x6b (0x7f43bb5f238b in /home/yaw.asomani/cxx/libraries/libtorch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) + 0xbf (0x7f43bb5ecf3f in /home/yaw.asomani/cxx/libraries/libtorch/lib/libc10.so)
+frame #2: at::native::item(at::Tensor const&) + 0x5a5 (0x7f440e69e275 in /home/yaw.asomani/cxx/libraries/libtorch/lib/libtorch_cpu.so)
+frame #3: <unknown function> + 0x2864f20 (0x7f440f6d5f20 in /home/yaw.asomani/cxx/libraries/libtorch/lib/libtorch_cpu.so)
+frame #4: at::_ops::item::call(at::Tensor const&) + 0xbc (0x7f440ee6ab3c in /home/yaw.asomani/cxx/libraries/libtorch/lib/libtorch_cpu.so)
+frame #5: double at::Tensor::item<double>() const + 0x23 (0x7f440fcb2943 in /home/yaw.asomani/cxx/libraries/libtorch/lib/libtorch_cpu.so)
+frame #6: <unknown function> + 0x11007 (0x559075418007 in ./ar_test)
+frame #7: __libc_start_main + 0xe5 (0x7f43b428e7e5 in /lib64/libc.so.6)
+frame #8: <unknown function> + 0x11d4a (0x559075418d4a in ./ar_test)
+
+/var/spool/slurmd/job34676328/slurm_script: line 19: 2223823 Aborted                 (core dumped) ./ar_test
+Job finished at: Fri Apr 18 20:20:20 MDT 2025
+Total time elapsed is: 0 day(s) 3 hour(s) 23 
+minute(s) and 56 second(s)

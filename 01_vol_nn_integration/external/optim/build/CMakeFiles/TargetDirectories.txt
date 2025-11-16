@@ -1,0 +1,8 @@
+/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build/CMakeFiles/DFO_lib.dir
+/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build/CMakeFiles/fminsearch_test.dir
+/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build/CMakeFiles/patternsearch_doc_examples_test.dir
+/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build/CMakeFiles/patternsearch_enhanced_test.dir
+/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build/CMakeFiles/patternsearch_matlab_examples_test.dir
+/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build/CMakeFiles/patternsearch_test.dir
+/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build/CMakeFiles/edit_cache.dir
+/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build/CMakeFiles/rebuild_cache.dir

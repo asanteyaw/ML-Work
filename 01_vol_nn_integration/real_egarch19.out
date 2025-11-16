@@ -1,0 +1,159 @@
+MPS available. Training on GPU.
+Done with epoch {}: 0; Loss: -12802.7
+Done with epoch {}: 1; Loss: -11601
+Done with epoch {}: 2; Loss: -12723.2
+Done with epoch {}: 3; Loss: -12601.5
+Done with epoch {}: 4; Loss: -12237.5
+Done with epoch {}: 5; Loss: -12251.5
+Done with epoch {}: 6; Loss: -12473.7
+Done with epoch {}: 7; Loss: -12653.7
+Done with epoch {}: 8; Loss: -12693.7
+Done with epoch {}: 9; Loss: -12631.3
+Done with epoch {}: 10; Loss: -12555.2
+Done with epoch {}: 11; Loss: -12530.9
+Done with epoch {}: 12; Loss: -12570
+Done with epoch {}: 13; Loss: -12641.5
+Done with epoch {}: 14; Loss: -12703.8
+Done with epoch {}: 15; Loss: -12729.9
+Done with epoch {}: 16; Loss: -12717.7
+Done with epoch {}: 17; Loss: -12686.7
+Done with epoch {}: 18; Loss: -12665.3
+Done with epoch {}: 19; Loss: -12672.1
+Done with epoch {}: 20; Loss: -12704.3
+Done with epoch {}: 21; Loss: -12741.5
+Done with epoch {}: 22; Loss: -12761.6
+Done with epoch {}: 23; Loss: -12755.7
+Done with epoch {}: 24; Loss: -12733.6
+Done with epoch {}: 25; Loss: -12716.6
+Done with epoch {}: 26; Loss: -12719.6
+Done with epoch {}: 27; Loss: -12740.2
+Done with epoch {}: 28; Loss: -12762.1
+Done with epoch {}: 29; Loss: -12770.5
+Done with epoch {}: 30; Loss: -12763.2
+Done with epoch {}: 31; Loss: -12751.3
+Done with epoch {}: 32; Loss: -12747.9
+Done with epoch {}: 33; Loss: -12756.7
+Done with epoch {}: 34; Loss: -12770.5
+Done with epoch {}: 35; Loss: -12778.6
+Done with epoch {}: 36; Loss: -12776.9
+Done with epoch {}: 37; Loss: -12770.5
+Done with epoch {}: 38; Loss: -12768.1
+Done with epoch {}: 39; Loss: -12773.3
+Done with epoch {}: 40; Loss: -12782.2
+Done with epoch {}: 41; Loss: -12787.6
+Done with epoch {}: 42; Loss: -12786.9
+Done with epoch {}: 43; Loss: -12783.8
+Done with epoch {}: 44; Loss: -12783.6
+Done with epoch {}: 45; Loss: -12787.9
+Done with epoch {}: 46; Loss: -12792.7
+Done with epoch {}: 47; Loss: -12794
+Done with epoch {}: 48; Loss: -12792.3
+Done with epoch {}: 49; Loss: -12791.7
+Done with epoch {}: 50; Loss: -12794.4
+Done with epoch {}: 51; Loss: -12798.1
+Done with epoch {}: 52; Loss: -12799
+Done with epoch {}: 53; Loss: -12797.4
+Done with epoch {}: 54; Loss: -12796.6
+Done with epoch {}: 55; Loss: -12798.3
+Done with epoch {}: 56; Loss: -12800.6
+Done with epoch {}: 57; Loss: -12800.9
+Done with epoch {}: 58; Loss: -12799.9
+Done with epoch {}: 59; Loss: -12799.8
+Done with epoch {}: 60; Loss: -12801.2
+Done with epoch {}: 61; Loss: -12802.1
+Done with epoch {}: 62; Loss: -12801.6
+Done with epoch {}: 63; Loss: -12801.1
+Done with epoch {}: 64; Loss: -12801.7
+Done with epoch {}: 65; Loss: -12802.5
+Done with epoch {}: 66; Loss: -12802.2
+Done with epoch {}: 67; Loss: -12801.5
+Done with epoch {}: 68; Loss: -12801.7
+Done with epoch {}: 69; Loss: -12802.3
+Breaking at epoch {}: 70; Loss: -12802.3
+Final Returns loss: -16560.2
+[ MPSFloatType{} ]
+Final RV loss: 3758.31
+[ MPSFloatType{} ]
+Final loss: -12801.9
+[ MPSFloatType{} ]
+omega: -0.33669
+[ MPSFloatType{} ]
+beta: 0.96417
+[ MPSFloatType{} ]
+phi: 1.04139
+[ MPSFloatType{} ]
+sigma: 0.513031
+[ MPSFloatType{} ]
+lamda: 0.0211761
+[ MPSFloatType{} ]
+gamma: 0.253662
+[ MPSFloatType{} ]
+xi: -0.0718594
+[ MPSFloatType{} ]
+d1: -0.13061
+[ MPSFloatType{} ]
+d2: 0.108234
+[ MPSFloatType{} ]
+t1: -0.175962
+[ MPSFloatType{} ]
+t2: 0.0388193
+[ MPSFloatType{} ]
+Done with pricing
+OptionPrice  ModelPrice   ImpliedVol   ModelImpVol  
+------------------------------------------------
+2.7500       7.1829       0.1166       0.1519       
+1            2.5529       0.1211       0.1456       
+37.7500      39.4006      0.1730       0.1802       
+1.8750       5.8084       0.1136       0.1504       
+0.9500       3.2699       0.1144       0.1469       
+4.8500       10.6422      0.1191       0.1549       
+2.4000       6.1983       0.1178       0.1465       
+52.5000      54.8234      0.1747       0.1807       
+20.7000      17.8563      0.2279       0.2148       
+28.0500      26.2121      0.2104       0.2031       
+11.4500      8.2087       0.2623       0.2392       
+59.7000      63.1142      0.1675       0.1765       
+19.8500      28.0921      0.1348       0.1588       
+33.7000      28.9690      0.2150       0.2004       
+17.5500      12.4411      0.2518       0.2269       
+56.7000      55.6377      0.1835       0.1810       
+43.5000      40.3252      0.1990       0.1905       
+64.8000      65.0239      0.1757       0.1763       
+88.3000      86.5659      0.1782       0.1745       
+31.2000      22.1807      0.2392       0.2107       
+58.1500      51.5423      0.2026       0.1881       
+71.6000      67.1457      0.1903       0.1812       
+14.7000      23.6486      0.1299       0.1543       
+116.6000     111.7155     0.1815       0.1737       
+20.7500      9.1964       0.2813       0.2292       
+91.1500      81.5947      0.1969       0.1813       
+83.9000      73.0995      0.2020       0.1839       
+30.0500      16.2284      0.2620       0.2169       
+67.9000      49.3101      0.2268       0.1943       
+124.2500     126.1508     0.1732       0.1753       
+140.5500     133.5798     0.1838       0.1743       
+20.6500      32.3307      0.1338       0.1563       
+78.8000      61.6474      0.2182       0.1906       
+18.4500      15.2740      0.2295       0.2144       
+43.0500      42.9743      0.1849       0.1868       
+8.4500       5.1613       0.2754       0.2451       
+2.6500       6.5267       0.1263       0.1621       
+6.2500       11.8510      0.1312       0.1667       
+3.5000       8.0254       0.1271       0.1635       
+58.8500      59.6232      0.1835       0.1856       
+57.0500      57.5093      0.1855       0.1866       
+26.9500      23.3783      0.2297       0.2152       
+9.8000       5.7319       0.2950       0.2589       
+60.7500      61.8111      0.1817       0.1846       
+2.5250       0.6518       0.3892       0.3217       
+32.6000      26.1948      0.2303       0.2092       
+71.3500      70.0827      0.1820       0.1792       
+17.3000      24.3791      0.1390       0.1618       
+54.7500      51.0763      0.1981       0.1889       
+19.6000      13.2922      0.2618       0.2318       
+Approx IVRMSE: 0.02432
+[ MPSFloatType{} ]
+IVRMSE: 0.0283
+[ MPSFloatType{} ]
+Done!
+

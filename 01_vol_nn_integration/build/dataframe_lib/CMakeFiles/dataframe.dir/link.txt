@@ -1,0 +1,2 @@
+/Users/yawasante/software/miniconda3/envs/cpp_env/bin/ar qc libdataframe.a CMakeFiles/dataframe.dir/src/dataframe.cpp.o CMakeFiles/dataframe.dir/src/dataframe_io.cpp.o CMakeFiles/dataframe.dir/src/file_loader.cpp.o CMakeFiles/dataframe.dir/src/main_test.cpp.o
+/Users/yawasante/software/miniconda3/envs/cpp_env/bin/llvm-ranlib libdataframe.a

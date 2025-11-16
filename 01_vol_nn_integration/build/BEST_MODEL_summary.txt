@@ -1,0 +1,9 @@
+Volatility-Integrated Model Summary
+===================================
+Model Type: gru-HN
+Total Parameters: 12
+Input Size: 3
+Hidden Size: 1
+Number of Layers: 1
+Has Bias: Yes
+Final Log-Likelihood: nan

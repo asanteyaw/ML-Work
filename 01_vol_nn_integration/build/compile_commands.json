@@ -1,0 +1,80 @@
+[
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/NeuralPricingKernel.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/NeuralPricingKernel.cpp",
+  "output": "CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/bsIV.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/bsIV.cpp",
+  "output": "CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/utils.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/utils.cpp",
+  "output": "CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/chn_test.dir/src/chn_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/chn_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/chn_test.cpp",
+  "output": "CMakeFiles/chn_test.dir/src/chn_test.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/example_test.dir/src/example_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/example_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/example_test.cpp",
+  "output": "CMakeFiles/example_test.dir/src/example_test.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/hn_test.dir/src/hn_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/hn_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/hn_test.cpp",
+  "output": "CMakeFiles/hn_test.dir/src/hn_test.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/neural_pricing_test.dir/src/neural_pricing_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/neural_pricing_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/neural_pricing_test.cpp",
+  "output": "CMakeFiles/neural_pricing_test.dir/src/neural_pricing_test.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/simulation_test.dir/src/simulation_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/simulation_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/simulation_test.cpp",
+  "output": "CMakeFiles/simulation_test.dir/src/simulation_test.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/vi_test.dir/src/vi_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/vi_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/vi_test.cpp",
+  "output": "CMakeFiles/vi_test.dir/src/vi_test.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/dataframe_lib",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include  -O3 -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-variable -Wno-sign-compare -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/dataframe.dir/src/dataframe.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/src/dataframe.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/src/dataframe.cpp",
+  "output": "dataframe_lib/CMakeFiles/dataframe.dir/src/dataframe.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/dataframe_lib",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include  -O3 -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-variable -Wno-sign-compare -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/dataframe.dir/src/dataframe_io.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/src/dataframe_io.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/src/dataframe_io.cpp",
+  "output": "dataframe_lib/CMakeFiles/dataframe.dir/src/dataframe_io.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/dataframe_lib",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include  -O3 -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-variable -Wno-sign-compare -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/dataframe.dir/src/file_loader.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/src/file_loader.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/src/file_loader.cpp",
+  "output": "dataframe_lib/CMakeFiles/dataframe.dir/src/file_loader.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/dataframe_lib",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include  -O3 -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-variable -Wno-sign-compare -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/dataframe.dir/src/main_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/src/main_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/src/main_test.cpp",
+  "output": "dataframe_lib/CMakeFiles/dataframe.dir/src/main_test.cpp.o"
+}
+]

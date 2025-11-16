@@ -1,0 +1,95 @@
+	•	add_library(dataframe STATIC ${{SOURCE_FILES}})
+🔹 This creates a static library named libdataframe.a (or dataframe.lib on Windows). The name libdataframe.a 
+is because you named your static library "dataframe". It's naming convention is lib<library_name>.a
+🔹 The library consists of all .cpp files in the src/ folder.
+🔹 You don’t need a dataframe folder or file—it’s just a name for the compiled output.
+
+	•	target_include_directories(dataframe PUBLIC include)
+🔹 This tells CMake that the header files are in the include/ folder.
+🔹 If your .h files are in include/, this line ensures they are accessible in other projects.
+🔹 Tells CMake where to find the header files (.h files) for newly created static library "dataframe".
+🔹 What This Does:
+	•	Any file that links to dataframe will automatically get access to headers in include/.
+	•	This allows main.cpp (or other projects) that has a link to your "dataframe" static library to simply #include "dataframe.h" without specifying paths manually.
+  so you can see this line target_include_directories(dataframe PUBLIC include) is very important
+
+	•	target_link_libraries(dataframe "${TORCH_LIBRARIES}")
+🔹 This links Libtorch to dataframe so it can use PyTorch operations.
+
+• set(CMAKE_CXX_STANDARD 20)
+• set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+This will:
+	🔹	Enable C++20 features for your code.
+	🔹	Still allow linking with Libtorch (built with C++17). So the second line ensures that the 
+  standard required by torch which is C++17 is still "ON" even though our current project's standard
+  is C++20
+
+Libtorch binaries are built using C++17 ABI. If your compiler defaults to a C++20 ABI, you might see linker errors.
+✅ Fix: Ensure the ABI setting is correct by doing this.
+• add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)  # If Libtorch was built with this setting(or ABI=1) depending on what torch was built with
+
+
+# Add an executable target for testing
+• add_executable(datalib src/main.cpp)  this creates an executable named "datalib" and links it to the "main.cpp" file.
+so when you do ./datalib, it will run the main.cpp file inside your src folder
+
+If you replace:
+add_executable(datalib main.cpp)
+with 
+add_executable(${PROJECT_NAME} ${SOURCE_FILES}), like you have done apriori,
+It won’t work correctly, because:
+	1.	${PROJECT_NAME} expands to datalib, which is fine.
+	2.	${SOURCE_FILES} contains ALL .cpp files, including src/*.cpp, but we only need main.cpp here.
+	3.	This would try to compile all .cpp files as an executable, instead of linking them correctly.
+  4. Only files with int main() should be executable, and not all .cpp files have int main() so it's not wise to attempt to compile all .cpp as
+  executables, and that is what add_executable(${PROJECT_NAME} ${SOURCE_FILES}) tries to do.
+So maybe you can rather do
+add_executable(${PROJECT_NAME} sr/main.cpp), but a potential downside is that if you have other .cpp files that also
+have int main() and they execute other things, then there might be ambiguity if you do ./datalib as cmake wouldn't know which .cpp file to run
+
+In summary, the most optimal approach is
+• add_executable(datalib main.cpp)
+
+This ensures that:
+	•	The executable only compiles main.cpp.
+	•	The rest of the .cpp files logic is compiled inside libdataframe.a (static library).
+  • There is no ambiguity if another .cpp file with int main() is to be an executable, because it will have it's own name to
+  like so: add_executable(other_name other_file_with_int_main.cpp)
+  • All executables(like main.cpp, or a .cpp file which is meant for executable duties) must have a int main(){} function.
+     Otherwise, the compiler will fail because it won’t know where to start execution.
+✅ KEY TAKEAWAY
+When you run "make", it will first compile all  source files (src/*.cpp) into libdataframe.a because of:
+add_library(dataframe STATIC ${SOURCE_FILES})
+
+Then it compiles main.cpp separately to build the executable "datalib", because of:
+add_executable(datalib main.cpp)
+
+✅ It only compiles the full DataFrame(.cpp files and header files) code once (to libdataframe.a).
+✅ When building datalib, it does NOT recompile those .cpp files — it just links them.
+
+# Link the dataframe library to the executable
+• target_link_libraries(datalib PRIVATE dataframe)
+This line tells CMake to link the executable (datalib) with the dataframe library:
+	•	datalib → The executable target (from add_executable(datalib main.cpp)).
+	•	dataframe → The static library that we defined earlier:
+
+📌 3️⃣ Why PRIVATE vs PUBLIC vs INTERFACE?
+Keyword	                      Meaning
+PRIVATE	              dataframe is only used by datalib, and not inherited by targets that depend on datalib.
+PUBLIC	              dataframe is used by datalib and any target that links to datalib.
+INTERFACE	            dataframe is not compiled into datalib but only its include directories and definitions are passed.
+
+For our case 
+
+✅ PRIVATE is correct because:
+	•	dataframe (our static library) is only needed by datalib.
+	•	Other projects linking to datalib don’t need to know about dataframe.
+
+🔹 When Would PUBLIC Be Used?
+
+If datalib were another library and other projects depended on it, then we’d use:
+• target_link_libraries(datalib PUBLIC dataframe)
+
+This way, everything that links to datalib also links to dataframe automatically.
+But datalib is not even a library, it's an executable, so no need for PUBLIC there.

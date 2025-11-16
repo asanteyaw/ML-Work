@@ -1,0 +1,74 @@
+[
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/DFO_lib.dir/src/feasibility_restoration.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/feasibility_restoration.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/feasibility_restoration.cpp",
+  "output": "CMakeFiles/DFO_lib.dir/src/feasibility_restoration.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/DFO_lib.dir/src/fminsearch.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/fminsearch.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/fminsearch.cpp",
+  "output": "CMakeFiles/DFO_lib.dir/src/fminsearch.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/DFO_lib.dir/src/mads_algorithm.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/mads_algorithm.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/mads_algorithm.cpp",
+  "output": "CMakeFiles/DFO_lib.dir/src/mads_algorithm.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/DFO_lib.dir/src/parallel_poll.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/parallel_poll.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/parallel_poll.cpp",
+  "output": "CMakeFiles/DFO_lib.dir/src/parallel_poll.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/DFO_lib.dir/src/patternsearch.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch.cpp",
+  "output": "CMakeFiles/DFO_lib.dir/src/patternsearch.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/DFO_lib.dir/src/patternsearch_enhanced.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch_enhanced.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch_enhanced.cpp",
+  "output": "CMakeFiles/DFO_lib.dir/src/patternsearch_enhanced.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/DFO_lib.dir/src/search_methods.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/search_methods.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/search_methods.cpp",
+  "output": "CMakeFiles/DFO_lib.dir/src/search_methods.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/fminsearch_test.dir/src/fminsearch_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/fminsearch_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/fminsearch_test.cpp",
+  "output": "CMakeFiles/fminsearch_test.dir/src/fminsearch_test.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/patternsearch_doc_examples_test.dir/src/patternsearch_doc_examples_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch_doc_examples_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch_doc_examples_test.cpp",
+  "output": "CMakeFiles/patternsearch_doc_examples_test.dir/src/patternsearch_doc_examples_test.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/patternsearch_enhanced_test.dir/src/patternsearch_enhanced_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch_enhanced_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch_enhanced_test.cpp",
+  "output": "CMakeFiles/patternsearch_enhanced_test.dir/src/patternsearch_enhanced_test.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/patternsearch_matlab_examples_test.dir/src/patternsearch_matlab_examples_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch_matlab_examples_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch_matlab_examples_test.cpp",
+  "output": "CMakeFiles/patternsearch_matlab_examples_test.dir/src/patternsearch_matlab_examples_test.cpp.o"
+},
+{
+  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/build",
+  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -I/Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/patternsearch_test.dir/src/patternsearch_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch_test.cpp",
+  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/DFO/src/patternsearch_test.cpp",
+  "output": "CMakeFiles/patternsearch_test.dir/src/patternsearch_test.cpp.o"
+}
+]
