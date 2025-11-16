@@ -1,2 +1,0 @@
-/Users/yawasante/software/miniconda3/envs/cpp_env/bin/ar qc libDFO_lib.a CMakeFiles/DFO_lib.dir/src/feasibility_restoration.cpp.o CMakeFiles/DFO_lib.dir/src/fminsearch.cpp.o CMakeFiles/DFO_lib.dir/src/mads_algorithm.cpp.o CMakeFiles/DFO_lib.dir/src/parallel_poll.cpp.o CMakeFiles/DFO_lib.dir/src/patternsearch.cpp.o CMakeFiles/DFO_lib.dir/src/patternsearch_enhanced.cpp.o CMakeFiles/DFO_lib.dir/src/search_methods.cpp.o
-/Users/yawasante/software/miniconda3/envs/cpp_env/bin/llvm-ranlib libDFO_lib.a

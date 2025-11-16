@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi
+CMAKE_SOURCE_DIR = /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build
+CMAKE_BINARY_DIR = /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/hn_garch_lib.dir/depend.make
@@ -72,63 +72,47 @@ include CMakeFiles/hn_garch_lib.dir/flags.make
 CMakeFiles/hn_garch_lib.dir/codegen:
 .PHONY : CMakeFiles/hn_garch_lib.dir/codegen
 
-CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o: CMakeFiles/hn_garch_lib.dir/flags.make
-CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o: /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/NeuralPricingKernel.cpp
-CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o: CMakeFiles/hn_garch_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o -MF CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o.d -o CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/NeuralPricingKernel.cpp
-
-CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.i"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/NeuralPricingKernel.cpp > CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.i
-
-CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.s"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/NeuralPricingKernel.cpp -o CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.s
-
 CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o: CMakeFiles/hn_garch_lib.dir/flags.make
-CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o: /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/bsIV.cpp
+CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o: /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/bsIV.cpp
 CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o: CMakeFiles/hn_garch_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o -MF CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o.d -o CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/bsIV.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o"
+	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o -MF CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o.d -o CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/bsIV.cpp
 
 CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.i"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/bsIV.cpp > CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.i
+	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/bsIV.cpp > CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.i
 
 CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.s"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/bsIV.cpp -o CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.s
+	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/bsIV.cpp -o CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.s
 
 CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o: CMakeFiles/hn_garch_lib.dir/flags.make
-CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o: /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/utils.cpp
+CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o: /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/utils.cpp
 CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o: CMakeFiles/hn_garch_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o -MF CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o.d -o CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o"
+	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o -MF CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o.d -o CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/utils.cpp
 
 CMakeFiles/hn_garch_lib.dir/src/utils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/hn_garch_lib.dir/src/utils.cpp.i"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/utils.cpp > CMakeFiles/hn_garch_lib.dir/src/utils.cpp.i
+	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/utils.cpp > CMakeFiles/hn_garch_lib.dir/src/utils.cpp.i
 
 CMakeFiles/hn_garch_lib.dir/src/utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/hn_garch_lib.dir/src/utils.cpp.s"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/utils.cpp -o CMakeFiles/hn_garch_lib.dir/src/utils.cpp.s
+	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/utils.cpp -o CMakeFiles/hn_garch_lib.dir/src/utils.cpp.s
 
 # Object files for target hn_garch_lib
 hn_garch_lib_OBJECTS = \
-"CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o" \
 "CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o" \
 "CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o"
 
 # External object files for target hn_garch_lib
 hn_garch_lib_EXTERNAL_OBJECTS =
 
-libhn_garch_lib.a: CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o
 libhn_garch_lib.a: CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o
 libhn_garch_lib.a: CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o
 libhn_garch_lib.a: CMakeFiles/hn_garch_lib.dir/build.make
 libhn_garch_lib.a: CMakeFiles/hn_garch_lib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libhn_garch_lib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libhn_garch_lib.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/hn_garch_lib.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/hn_garch_lib.dir/link.txt --verbose=$(VERBOSE)
 
@@ -141,6 +125,6 @@ CMakeFiles/hn_garch_lib.dir/clean:
 .PHONY : CMakeFiles/hn_garch_lib.dir/clean
 
 CMakeFiles/hn_garch_lib.dir/depend:
-	cd /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/CMakeFiles/hn_garch_lib.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/CMakeFiles/hn_garch_lib.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/hn_garch_lib.dir/depend
 

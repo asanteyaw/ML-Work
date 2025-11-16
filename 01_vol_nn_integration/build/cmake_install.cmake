@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi
+# Install script for directory: /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,13 +39,13 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/dataframe_lib/cmake_install.cmake")
+  include("/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/dataframe_lib/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/install_local_manifest.txt"
+  file(WRITE "/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -61,6 +61,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

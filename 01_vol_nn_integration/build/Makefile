@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi
+CMAKE_SOURCE_DIR = /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build
+CMAKE_BINARY_DIR = /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/CMakeFiles /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/CMakeFiles /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -169,19 +169,6 @@ hn_test/fast:
 .PHONY : hn_test/fast
 
 #=============================================================================
-# Target rules for targets named neural_pricing_test
-
-# Build rule for target.
-neural_pricing_test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 neural_pricing_test
-.PHONY : neural_pricing_test
-
-# fast build rule for target.
-neural_pricing_test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_pricing_test.dir/build.make CMakeFiles/neural_pricing_test.dir/build
-.PHONY : neural_pricing_test/fast
-
-#=============================================================================
 # Target rules for targets named simulation_test
 
 # Build rule for target.
@@ -219,30 +206,6 @@ dataframe: cmake_check_build_system
 dataframe/fast:
 	$(MAKE) $(MAKESILENT) -f dataframe_lib/CMakeFiles/dataframe.dir/build.make dataframe_lib/CMakeFiles/dataframe.dir/build
 .PHONY : dataframe/fast
-
-src/NeuralPricingKernel.o: src/NeuralPricingKernel.cpp.o
-.PHONY : src/NeuralPricingKernel.o
-
-# target to build an object file
-src/NeuralPricingKernel.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hn_garch_lib.dir/build.make CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o
-.PHONY : src/NeuralPricingKernel.cpp.o
-
-src/NeuralPricingKernel.i: src/NeuralPricingKernel.cpp.i
-.PHONY : src/NeuralPricingKernel.i
-
-# target to preprocess a source file
-src/NeuralPricingKernel.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hn_garch_lib.dir/build.make CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.i
-.PHONY : src/NeuralPricingKernel.cpp.i
-
-src/NeuralPricingKernel.s: src/NeuralPricingKernel.cpp.s
-.PHONY : src/NeuralPricingKernel.s
-
-# target to generate assembly for a file
-src/NeuralPricingKernel.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hn_garch_lib.dir/build.make CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.s
-.PHONY : src/NeuralPricingKernel.cpp.s
 
 src/bsIV.o: src/bsIV.cpp.o
 .PHONY : src/bsIV.o
@@ -340,30 +303,6 @@ src/hn_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hn_test.dir/build.make CMakeFiles/hn_test.dir/src/hn_test.cpp.s
 .PHONY : src/hn_test.cpp.s
 
-src/neural_pricing_test.o: src/neural_pricing_test.cpp.o
-.PHONY : src/neural_pricing_test.o
-
-# target to build an object file
-src/neural_pricing_test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_pricing_test.dir/build.make CMakeFiles/neural_pricing_test.dir/src/neural_pricing_test.cpp.o
-.PHONY : src/neural_pricing_test.cpp.o
-
-src/neural_pricing_test.i: src/neural_pricing_test.cpp.i
-.PHONY : src/neural_pricing_test.i
-
-# target to preprocess a source file
-src/neural_pricing_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_pricing_test.dir/build.make CMakeFiles/neural_pricing_test.dir/src/neural_pricing_test.cpp.i
-.PHONY : src/neural_pricing_test.cpp.i
-
-src/neural_pricing_test.s: src/neural_pricing_test.cpp.s
-.PHONY : src/neural_pricing_test.s
-
-# target to generate assembly for a file
-src/neural_pricing_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_pricing_test.dir/build.make CMakeFiles/neural_pricing_test.dir/src/neural_pricing_test.cpp.s
-.PHONY : src/neural_pricing_test.cpp.s
-
 src/simulation_test.o: src/simulation_test.cpp.o
 .PHONY : src/simulation_test.o
 
@@ -449,12 +388,8 @@ help:
 	@echo "... example_test"
 	@echo "... hn_garch_lib"
 	@echo "... hn_test"
-	@echo "... neural_pricing_test"
 	@echo "... simulation_test"
 	@echo "... vi_test"
-	@echo "... src/NeuralPricingKernel.o"
-	@echo "... src/NeuralPricingKernel.i"
-	@echo "... src/NeuralPricingKernel.s"
 	@echo "... src/bsIV.o"
 	@echo "... src/bsIV.i"
 	@echo "... src/bsIV.s"
@@ -467,9 +402,6 @@ help:
 	@echo "... src/hn_test.o"
 	@echo "... src/hn_test.i"
 	@echo "... src/hn_test.s"
-	@echo "... src/neural_pricing_test.o"
-	@echo "... src/neural_pricing_test.i"
-	@echo "... src/neural_pricing_test.s"
 	@echo "... src/simulation_test.o"
 	@echo "... src/simulation_test.i"
 	@echo "... src/simulation_test.s"

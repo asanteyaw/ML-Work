@@ -4,9 +4,9 @@
 # compile CXX with /Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++
 CXX_DEFINES = -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1
 
-CXX_INCLUDES = -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/include -I/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include
+CXX_INCLUDES = -I/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/include -I/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include
 
-CXX_FLAGSarm64 =  -O3 -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-variable -Wno-sign-compare -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk
+CXX_FLAGSarm64 =  -O3 -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-variable -Wno-sign-compare -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk -mmacosx-version-min=15.7
 
-CXX_FLAGS =  -O3 -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-variable -Wno-sign-compare -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk
+CXX_FLAGS =  -O3 -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-variable -Wno-sign-compare -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk -mmacosx-version-min=15.7
 

@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/external/dataframe
+# Install script for directory: /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/external/dataframe
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,6 +40,6 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/dataframe_lib/install_local_manifest.txt"
+  file(WRITE "/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/dataframe_lib/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

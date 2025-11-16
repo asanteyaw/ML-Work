@@ -1,6 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o"
-  "CMakeFiles/hn_garch_lib.dir/src/NeuralPricingKernel.cpp.o.d"
   "CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o"
   "CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o.d"
   "CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o"

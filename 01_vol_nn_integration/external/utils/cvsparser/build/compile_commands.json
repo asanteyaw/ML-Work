@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/Xperimental/utils/cvsparser/build",
-  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/Xperimental/utils/cvsparser  -O3 -march=native -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -o CMakeFiles/CSVParserTest.dir/CSVParserTest.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/Xperimental/utils/cvsparser/CSVParserTest.cpp",
-  "file": "/Users/yawasante/Documents/Doctrate/Thesis/C++/second_paper/with_returns/Xperimental/utils/cvsparser/CSVParserTest.cpp",
-  "output": "CMakeFiles/CSVParserTest.dir/CSVParserTest.cpp.o"
-}
-]

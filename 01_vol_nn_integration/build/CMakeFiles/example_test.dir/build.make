@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi
+CMAKE_SOURCE_DIR = /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build
+CMAKE_BINARY_DIR = /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/example_test.dir/depend.make
@@ -73,18 +73,18 @@ CMakeFiles/example_test.dir/codegen:
 .PHONY : CMakeFiles/example_test.dir/codegen
 
 CMakeFiles/example_test.dir/src/example_test.cpp.o: CMakeFiles/example_test.dir/flags.make
-CMakeFiles/example_test.dir/src/example_test.cpp.o: /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/example_test.cpp
+CMakeFiles/example_test.dir/src/example_test.cpp.o: /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/example_test.cpp
 CMakeFiles/example_test.dir/src/example_test.cpp.o: CMakeFiles/example_test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/example_test.dir/src/example_test.cpp.o"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/example_test.dir/src/example_test.cpp.o -MF CMakeFiles/example_test.dir/src/example_test.cpp.o.d -o CMakeFiles/example_test.dir/src/example_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/example_test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/example_test.dir/src/example_test.cpp.o"
+	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/example_test.dir/src/example_test.cpp.o -MF CMakeFiles/example_test.dir/src/example_test.cpp.o.d -o CMakeFiles/example_test.dir/src/example_test.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/example_test.cpp
 
 CMakeFiles/example_test.dir/src/example_test.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/example_test.dir/src/example_test.cpp.i"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/example_test.cpp > CMakeFiles/example_test.dir/src/example_test.cpp.i
+	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/example_test.cpp > CMakeFiles/example_test.dir/src/example_test.cpp.i
 
 CMakeFiles/example_test.dir/src/example_test.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/example_test.dir/src/example_test.cpp.s"
-	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/src/example_test.cpp -o CMakeFiles/example_test.dir/src/example_test.cpp.s
+	/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/example_test.cpp -o CMakeFiles/example_test.dir/src/example_test.cpp.s
 
 # Object files for target example_test
 example_test_OBJECTS = \
@@ -102,7 +102,7 @@ example_test: /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/s
 example_test: /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/lib/libc10.dylib
 example_test: /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/lib/libc10.dylib
 example_test: CMakeFiles/example_test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable example_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable example_test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/example_test.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -114,6 +114,6 @@ CMakeFiles/example_test.dir/clean:
 .PHONY : CMakeFiles/example_test.dir/clean
 
 CMakeFiles/example_test.dir/depend:
-	cd /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build /Users/yawasante/Documents/Doctrate/Thesis/C++/third_paper/HestonNandi/build/CMakeFiles/example_test.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build/CMakeFiles/example_test.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/example_test.dir/depend
 
