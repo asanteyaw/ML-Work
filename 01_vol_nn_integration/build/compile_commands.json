@@ -1,12 +1,6 @@
 [
 {
   "directory": "/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build",
-  "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/include -I/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk -mmacosx-version-min=15.7 -o CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/bsIV.cpp",
-  "file": "/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/bsIV.cpp",
-  "output": "CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o"
-},
-{
-  "directory": "/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/build",
   "command": "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++ -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -D_GLIBCXX_USE_CXX11_ABI=1 -I/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/include -I/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/external/dataframe/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include -isystem /Users/yawasante/software/miniconda3/envs/cpp_env/lib/python3.12/site-packages/torch/include/torch/csrc/api/include   -O3 -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk -mmacosx-version-min=15.7 -o CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o -c /Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/utils.cpp",
   "file": "/Users/yawasante/Documents/Doctrate/Thesis/Python/ML-Work/01_vol_nn_integration/src/utils.cpp",
   "output": "CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o"

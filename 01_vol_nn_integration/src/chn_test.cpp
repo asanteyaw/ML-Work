@@ -1,10 +1,9 @@
 #include <iostream>
 #include <torch/torch.h>
-#include "dataframe.h"
-#include "GARCH_Volatility.h"
+#include "make_data.h"
+#include "comp_heston_nandi.h"
 #include "utils.h"
 
-using namespace pluss::table;
 
 int main(){
 
@@ -12,28 +11,42 @@ int main(){
   torch::Device device(mps_available ? torch::kMPS : torch::kCPU);
   std::cout << (mps_available ? "MPS available. Training on GPU." : "Training on CPU.") << '\n';
 
-  // Read CSV file
-  auto returns_df = DataFrame::load("csv", "../all_data/exreturns.csv")->to(device);
-  auto options_df = DataFrame::load("csv", "../all_data/options.csv")->to(device);
-  auto noise_mat = DataFrame::read_matrix("../all_data/sample_1.csv");
-  
-  // filter returns
-  torch::Tensor ret_condition = (returns_df->get_col("Date") >= 19960101 & returns_df->get_col("Date") <= 20191231);
-  returns_df = returns_df->loc(ret_condition);
+  torch::Tensor chn_params = torch::tensor({
+    0.000005,   // omega_bar
+    0.90,       // phi
+    8.9188e-6,    // alpha
+    278.47,       // gamma1
+    0.98,       // rho
+    4.9188e-6,       // varphi
+    111.23,       // gamma2
+    1.43,       // lambda
+    1e-4,       // h0
+    1e-4        // q0
+    }, torch::kDouble);
 
-  // Filter Options
-  torch::Tensor op_condition = (options_df->get_col("Date") >= 20150101 & options_df->get_col("Date") <= 20191231);
-  options_df = options_df->loc(op_condition);
-  op_condition = (options_df->get_col("bDTM") >= 20);
-  options_df = options_df->loc(op_condition);
+    auto data = simulate_vol_model(
+        VolModel::CHN,
+        chn_params,
+        /*S0=*/100.0,
+        /*r=*/0.01,
+        /*d=*/0.00,
+        /*n_paths=*/10000,
+        /*n_steps=*/252,
+        torch::kCPU
+    );
 
-  auto returns = returns_df->get_col("exret");
-  
-  auto shock = noise_mat.to(device);
-  
+  torch::Tensor options = torch::tensor(
+    {{100.0, 0.5},
+     {110.0, 1.0},
+     {90.0,  2.0}}, torch::kDouble);  // [K, T] rows
+
+  // torch::save(data.R, "../all_data/CR.pt");
+  // torch::save(data.h, "../all_data/Ch.pt");
+  torch::load(data.R, "../all_data/CR.pt");   // load data
+ 
   int64_t num_epochs = 10'000;
   std::string vol_type = "CHNGARCH";
-  std::vector<float> loss_vals{};
+  std::vector<double> loss_vals{};
 
   torch::Tensor params = torch::tensor({1.1594e-4, 2.9188e-6, 0.8877, 2.3879, 332.9349, 134.4245, 1.6101e-6, 0.9905}).to(device);      
   torch::Tensor lb = torch::tensor({0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}).to(device);
@@ -44,37 +57,29 @@ int main(){
   ub = torch::div(ub, scaler);
   
   // Initialize the Component Heston and Nandi model
-  auto model = CHNModel(vol_type, scaled_params, lb, ub, scaler);
+  auto model = HestonNandiC(scaled_params, lb, ub, scaler);
   model->to(device);
   torch::optim::Adam optimizer(model->parameters(), torch::optim::AdamOptions(0.001));
   
-  // std::tie(model, loss_vals) = train_model(model, neg_log_likelihood, optimizer, num_epochs, {returns,});
+  std::tie(model, loss_vals) = train_model(model, neg_log_likelihood, optimizer, num_epochs, {data.R,});
 
-  // {
-  //   torch::NoGradGuard no_grad;
-  //   model->eval();
-  //   final_loss(model,  returns);  // calculate final likelihood
-  //   model->get_unscaled_params();
-  //   print_model_parameters(*model);
-        
-  // }
   // model->to(torch::kCPU);
   // torch::save(model, "../models/model_chn19.pt");
 
   {
       torch::NoGradGuard no_grad;
 
-      torch::load(model, "../models/model_chn19.pt");
+      // torch::load(model, "../models/model_chn19.pt");
       std::cout << model->parameters() << "\n";
       model->to(device);
       model->eval();
      
-      // monte carlo simulation
-      auto [approx_ivrmse, ivrmse] = IVRMSE(model, returns_df, options_df, shock);
-      std::cout << "Approx IVRMSE: " << approx_ivrmse << "\n";
-      std::cout << "IVRMSE: " << ivrmse << "\n";
+      // option pricing
+      auto call_prices = Pricer(model, options, /*is_call=*/true);
+      
+      std::cout << "Prices: " << call_prices << "\n";
     }  
-  // options_df.to_csv("../result_tables/real_egarch/output_df19.csv");
+  
   std::cout << "Done! \n";
 
   return 0;

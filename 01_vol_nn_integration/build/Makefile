@@ -207,30 +207,6 @@ dataframe/fast:
 	$(MAKE) $(MAKESILENT) -f dataframe_lib/CMakeFiles/dataframe.dir/build.make dataframe_lib/CMakeFiles/dataframe.dir/build
 .PHONY : dataframe/fast
 
-src/bsIV.o: src/bsIV.cpp.o
-.PHONY : src/bsIV.o
-
-# target to build an object file
-src/bsIV.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hn_garch_lib.dir/build.make CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.o
-.PHONY : src/bsIV.cpp.o
-
-src/bsIV.i: src/bsIV.cpp.i
-.PHONY : src/bsIV.i
-
-# target to preprocess a source file
-src/bsIV.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hn_garch_lib.dir/build.make CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.i
-.PHONY : src/bsIV.cpp.i
-
-src/bsIV.s: src/bsIV.cpp.s
-.PHONY : src/bsIV.s
-
-# target to generate assembly for a file
-src/bsIV.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hn_garch_lib.dir/build.make CMakeFiles/hn_garch_lib.dir/src/bsIV.cpp.s
-.PHONY : src/bsIV.cpp.s
-
 src/chn_test.o: src/chn_test.cpp.o
 .PHONY : src/chn_test.o
 
@@ -390,9 +366,6 @@ help:
 	@echo "... hn_test"
 	@echo "... simulation_test"
 	@echo "... vi_test"
-	@echo "... src/bsIV.o"
-	@echo "... src/bsIV.i"
-	@echo "... src/bsIV.s"
 	@echo "... src/chn_test.o"
 	@echo "... src/chn_test.i"
 	@echo "... src/chn_test.s"

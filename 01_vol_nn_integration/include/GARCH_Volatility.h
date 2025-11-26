@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ATen/core/TensorBody.h"
 #include <ATen/ops/stack.h>
 #include <c10/util/Exception.h>
 #include <torch/torch.h>
@@ -24,17 +25,23 @@ namespace garch_type_model {
 /**
  * @brief Base class for GARCH volatility models with unified parameter management
  */
-class GARCHModel : public torch::nn::Module {
+class GARCHModel {
 public:
     virtual ~GARCHModel() = default;
     
     // Core GARCH functionality
+    // Physical quantities
     virtual torch::Tensor update_variance(const torch::Tensor& h_t, const torch::Tensor& z_t) = 0;
     virtual torch::Tensor generate_returns(const torch::Tensor& h_t, const torch::Tensor& z_t, 
                                           double r = 0.0, double d = 0.0) = 0;
     virtual torch::Tensor generate_shock(const torch::Tensor& h_t, const torch::Tensor& y_t,
                                             double r = 0.0, double d = 0.0) = 0;
     
+    // Risk-Neutral quantities
+    virtual torch::Tensor update_rn_variance(const torch::Tensor& h_t, const torch::Tensor& z_t) = 0;
+    virtual torch::Tensor generate_rn_returns(const torch::Tensor& h_t, const torch::Tensor& z_t, 
+                                          double r = 0.0, double d = 0.0) = 0;
+
     // Unified parameter management interface
     virtual std::vector<torch::Tensor> get_params() = 0;
     virtual void set_params(std::vector<torch::Tensor> params, bool learnable = true) = 0;
@@ -51,14 +58,13 @@ public:
  */
 class HNModel : public GARCHModel {
 public:
-    torch::Tensor omega, alpha, phi, lamda, gamma;
     
     HNModel(torch::Tensor vol_params)
-        : omega(register_parameter("omega",vol_params[0]))
-        , alpha(register_parameter("alpha",vol_params[1]))
-        , phi(register_parameter("phi",vol_params[2]))
-        , lamda(register_parameter("lamda",vol_params[3]))
-        , gamma(register_parameter("gamma1",vol_params[4])) {}
+        : omega(vol_params[0])
+        , alpha(vol_params[1])
+        , phi(vol_params[2])
+        , lamda(vol_params[3])
+        , gamma(vol_params[4]) {}
     
     torch::Tensor update_variance(const torch::Tensor& h_t, const torch::Tensor& z_t) override {
         // h_{t+1} = ω̄ + φ(h_t - ω̄) + α(z_t² - 1 - 2γ√h_t z_t)
@@ -69,8 +75,22 @@ public:
     
     torch::Tensor generate_returns(const torch::Tensor& h_t, const torch::Tensor& z_t, 
                                   double r = 0.0, double d = 0.0) override {
-        // R_{t+1} = r - d + λh_{t+1} + √h_{t+1} z_{t+1}, where λ=params
+        // y_{t+1} = r - d + λh_{t+1} + √h_{t+1} z_{t+1}
         return r - d + lamda * h_t + torch::sqrt(h_t) * z_t;
+    }
+
+    torch::Tensor update_rn_variance(const torch::Tensor& h_t, const torch::Tensor& z_t) override {
+        // h_{t+1} = ω̄ + φ(h_t - ω̄) + α((θₖh_t + z_t)² - 1 - 2γ√h_t (θₖh_t + z_t))
+        auto tht = -(lamda + 0.5);
+
+        return omega + phi * (h_t - omega) + 
+               alpha * (torch::pow(tht * h_t + z_t, 2) - 1 - 2 * gamma * torch::sqrt(h_t) * (tht * h_t + z_t));
+    }
+    
+    torch::Tensor generate_rn_returns(const torch::Tensor& h_t, const torch::Tensor& z_t, 
+                                  double r = 0.0, double d = 0.0) override {
+        // y_{t+1} = r - d - 0.5h_{t+1} + √h_{t+1} z_{t+1}
+        return r - d - 0.5 * h_t + torch::sqrt(h_t) * z_t;
     }
 
     torch::Tensor generate_shock(const torch::Tensor& h_t, const torch::Tensor& y_t, 
@@ -131,6 +151,9 @@ public:
         if (state_dict.count("lamda")) lamda = state_dict.at("lamda");
         if (state_dict.count("gamma")) gamma = state_dict.at("gamma");
     }
+
+    private:
+        torch::Tensor omega, alpha, phi, lamda, gamma;
 };
 
 /**
@@ -138,18 +161,16 @@ public:
  */
 class CHNModel : public GARCHModel {
 public:
-    torch::Tensor omega, alpha, phi, lamda, gamma1, gamma2, vphi, rho;
-    torch::Tensor q_t; // Long-run component state
     
     CHNModel(torch::Tensor vol_params)
-        : omega(register_parameter("omega",vol_params[0]))
-        , alpha(register_parameter("alpha",vol_params[1]))
-        , phi(register_parameter("phi",vol_params[2]))
-        , lamda(register_parameter("lamda",vol_params[3]))
-        , gamma1(register_parameter("gamma1",vol_params[4]))
-        , gamma2(register_parameter("gamma2",vol_params[5]))
-        , vphi(register_parameter("vphi",vol_params[6]))
-        , rho(register_parameter("rho",vol_params[7])) {}
+        : omega(vol_params[0])
+        , alpha(vol_params[1])
+        , phi(vol_params[2])
+        , lamda(vol_params[3])
+        , gamma1(vol_params[4])
+        , gamma2(vol_params[5])
+        , vphi(vol_params[6])
+        , rho(vol_params[7]) {}
     
     std::pair<torch::Tensor, torch::Tensor> update_variance_components(
         const torch::Tensor& h_t, const torch::Tensor& qt_1, const torch::Tensor& z_t) {
@@ -175,6 +196,21 @@ public:
         return r - d + lamda * h_t + torch::sqrt(h_t) * z_t;
     }
 
+    torch::Tensor generate_rn_returns(const torch::Tensor& h_t, const torch::Tensor& z_t, 
+                                  double r = 0.0, double d = 0.0) override {
+        // y_{t+1} = r - d - 0.5h_{t+1} + √h_{t+1} z_{t+1}
+        return r - d - 0.5 * h_t + torch::sqrt(h_t) * z_t;
+    }
+
+    torch::Tensor update_rn_variance(const torch::Tensor& h_t, const torch::Tensor& z_t) override {
+        // q_{t+1} = ω̄ + φ(h_t - ω̄) + α((θₖh_t + z_t)² - 1 - 2γ₁√h_t (θₖh_t + z_t))
+        // h_{t+1} = q_t + φ(q_t - ω̄) + α((θₖh_t + z_t)² - 1 - 2γ√h_t (θₖh_t + z_t))
+        auto tht = -(lamda + 0.5);
+        
+        return omega + phi * (h_t - omega) + 
+               alpha * (torch::pow(tht * h_t + z_t, 2) - 1 - 2 * gamma1 * torch::sqrt(h_t) * (tht * h_t + z_t));
+    }
+
     torch::Tensor generate_shock(const torch::Tensor& h_t, const torch::Tensor& y_t, 
                                   double r = 0.0, double d = 0.0) override {    
         return (y_t - r + d - lamda * h_t) / torch::sqrt(h_t);
@@ -183,6 +219,14 @@ public:
     // Unified parameter management interface implementation
     std::vector<torch::Tensor> get_params() override {
         return {omega, alpha, phi, lamda, gamma1, gamma2, vphi, rho};
+    }
+
+    void set_long_var (torch::Tensor& long_var){
+        q_t = long_var;
+    }
+
+    torch::Tensor get_long_var (){
+        return  q_t;
     }
     
     void set_params(std::vector<torch::Tensor> params, bool learnable = false) override {
@@ -249,6 +293,10 @@ public:
         if (state_dict.count("rho")) rho = state_dict.at("rho");
         if (state_dict.count("q_t")) q_t = state_dict.at("q_t");
     }
+
+    private:
+        torch::Tensor omega, alpha, phi, lamda, gamma1, gamma2, vphi, rho;
+        torch::Tensor q_t; // Long-run component state
 };
 }  // namespace garch_type_model
 
