@@ -1,0 +1,196 @@
+# Build directories
+build/
+build-*/
+cmake-build-*/
+out/
+
+# CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# LibTorch/PyTorch specific
+libtorch/
+*.pt
+*.pth
+*.onnx
+
+# CUDA
+*.i
+*.ii
+*.gpu
+*.ptx
+*.cubin
+*.fatbin
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Model outputs
+models/
+checkpoints/
+*.model
+*.weights
+
+# Data files (uncomment if you want to ignore data)
+# data/
+# datasets/
+# *.csv
+# *.json
+# *.txt
+
+# Python (if any Python scripts are added)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Documentation build
+docs/build/
+*.pdf
+*.aux
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+
+# Performance profiling
+*.prof
+*.nvprof
+*.nsight*
+callgrind.out.*
+perf.data*
+
+# Core dumps
+core
+core.*
+
+# Test files
+test_results/
+coverage/
+*.gcov
+*.gcda
+*.gcno
+
+# Package managers
+conan/
+vcpkg/
+
+# Environment variables
+.env
+.env.local
+
+# Archive files
+*.zip
+*.tar
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.rar
+*.7z
+
+# Large files that shouldn't be tracked
+*.bin
+*.dat
+*.raw
+
+# Jupyter notebooks (if any)
+.ipynb_checkpoints/
+
+# R files (if any R analysis scripts)
+.Rhistory
+.RData
+.Ruserdata
+
+# MATLAB files (if any)
+*.asv
+*.mat
+
+# Editor backups
+*.orig
+*~
+
+# SSH keys
+*.pem
+*.key
+id_rsa*
+id_ecdsa*
+id_ed25519*
+
+# Configuration files with sensitive info
+config.ini
+secrets.json
+credentials.json
+
+# Custom project specific ignores
+results/
+experiments/
+plots/
+figures/
+temp/
+scratch/

@@ -278,6 +278,49 @@ torch::Tensor forecast_volatility(VolRNNModel& model,
 }
 ```
 
+## 🗂️ Repository Management
+
+### **File Size Management**
+This project includes a comprehensive `.gitignore` to prevent accidentally committing large files:
+
+- **Data files**: `*.csv`, `*.pt`, `*.h5`, etc.
+- **Build artifacts**: `build/`, `*.o`, `*.a`
+- **Model files**: `models/`, `trained_models/`
+- **Results**: `losses/`, `result_tables/`
+
+### **Git LFS for Large Files (Optional)**
+For large datasets that need version control:
+
+```bash
+# Install Git LFS
+git lfs install
+
+# Track large file types
+git lfs track "*.csv"
+git lfs track "*.pt" 
+git lfs track "*.h5"
+
+# Add and commit LFS configuration
+git add .gitattributes
+git commit -m "Configure Git LFS for large files"
+```
+
+### **Repository Cleanup**
+If you encounter GitHub's large file error:
+
+```bash
+# Check for large files in history
+git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | sed -n 's/^blob //p' | sort --numeric-sort --key=2 | tail -10
+
+# Clean repository history (⚠️ DESTRUCTIVE - creates new history)
+brew install git-filter-repo
+git filter-repo --path YOUR_LARGE_FILE.csv --invert-paths --force
+
+# Re-add remote and force push clean history
+git remote add origin https://github.com/yourusername/ML-Work.git
+git push --force origin main
+```
+
 ## 🐛 Troubleshooting
 
 ### **Common Issues**
@@ -306,6 +349,12 @@ if (loss.isnan().any().item<bool>()) {
 ```cpp  
 // Adjust learning rate and parameter bounds
 torch::optim::Adam optimizer(model->parameters(), 0.0001);  // Lower LR
+```
+
+**GitHub Push Rejected (Large Files)**
+```bash
+# Repository cleaned! Should no longer occur with proper .gitignore
+# If it happens again, see "Repository Management" section above
 ```
 
 ## 📚 References & Citation
