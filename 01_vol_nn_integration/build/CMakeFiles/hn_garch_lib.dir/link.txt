@@ -1,2 +1,0 @@
-/Users/yawasante/software/miniconda3/envs/cpp_env/bin/ar qc libhn_garch_lib.a CMakeFiles/hn_garch_lib.dir/src/utils.cpp.o
-/Users/yawasante/software/miniconda3/envs/cpp_env/bin/llvm-ranlib libhn_garch_lib.a
