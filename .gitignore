@@ -1,0 +1,70 @@
+# Large Data Files
+*.csv
+*.pt
+*.pth
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.mat
+
+# Build artifacts
+build/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# IDE and OS files
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Data directories
+data/
+datasets/
+all_data/
+external/utils/
+
+# Model files
+models/
+trained_models/
+checkpoints/
+*.model
+
+# Results and outputs
+results/
+result_tables/
+losses/
+outputs/
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
