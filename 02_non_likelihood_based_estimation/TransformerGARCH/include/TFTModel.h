@@ -35,8 +35,8 @@ struct TFTNGARCHModelImpl : torch::nn::Module {
     torch::nn::Linear parameter_projection{nullptr};
     torch::Tensor omega{}, alpha{}, phi{}, lamda{}, gamma{};
     int64_t input_size_{}, hidden_size_{}, output_size_{}, num_encoder_steps_{};
-    torch::Tensor r{torch::tensor(0.019)}, d{torch::tensor(0.012)};   // risk-free rate and dividend yield
-    std::vector<std::function<torch::Tensor(torch::Tensor&)>> act_transforms{};
+    double r_{0.019}, d_{0.012};   // risk-free rate and dividend yield
+    std::vector<std::function<torch::Tensor(const torch::Tensor&)>> act_transforms{};
     const std::string vol_type;
     tft::TFTConfig config_;
 
@@ -89,7 +89,9 @@ inline TFTNGARCHModelImpl::TFTNGARCHModelImpl(std::string vol,
 }
 
 inline std::pair<torch::Tensor, torch::Tensor> TFTNGARCHModelImpl::simulate_ngarch(torch::Tensor params, size_t T){
-    auto device = torch::kCPU;
+    TORCH_CHECK(params.dim() == 2 && params.size(1) == 5, "TFTNGARCHModel::simulate_ngarch expects params of shape [batch_size, 5]");
+    auto device = params.device();
+    auto options = params.options();
     // true values
     omega = params.select(1, 0);
     alpha = params.select(1, 1);
@@ -99,8 +101,8 @@ inline std::pair<torch::Tensor, torch::Tensor> TFTNGARCHModelImpl::simulate_ngar
 
     // compute initial quantities
     torch::Tensor h_t = omega;
-    torch::Tensor m_t = r - d + lamda * torch::sqrt(h_t) - 0.5 * h_t;
-    torch::Tensor z_t = torch::randn(params.size(0)).to(device);
+    torch::Tensor m_t = r_ - d_ + lamda * torch::sqrt(h_t) - 0.5 * h_t;
+    torch::Tensor z_t = torch::randn({params.size(0)}, options);
     torch::Tensor x_t = m_t + torch::sqrt(h_t) * z_t;
 
     // store in containers
@@ -112,8 +114,8 @@ inline std::pair<torch::Tensor, torch::Tensor> TFTNGARCHModelImpl::simulate_ngar
     // compute rest of quantities
     for(size_t t{1}; t < T; ++t){
        h_t = omega + phi * (h_l[t-1] - omega) + alpha*h_l[t-1]*(torch::pow(z_l[t-1],2)-2.0*gamma*z_l[t-1]-1.0);
-       m_t = r - d + lamda * torch::sqrt(h_t) - 0.5 * h_t;
-       z_t = torch::randn(params.size(0)).to(device);
+       m_t = r_ - d_ + lamda * torch::sqrt(h_t) - 0.5 * h_t;
+       z_t = torch::randn({params.size(0)}, options);
        x_t = m_t + torch::sqrt(h_t) * z_t;
 
        // update containers
@@ -136,6 +138,7 @@ inline torch::Tensor TFTNGARCHModelImpl::out_transform(const torch::Tensor& para
 }
 
 inline torch::Tensor TFTNGARCHModelImpl::ngarch_eq(const torch::Tensor& params, const torch::Tensor& x){
+   TORCH_CHECK(params.dim() == 2 && params.size(1) == 5, "TFTNGARCHModel::ngarch_eq expects params of shape [batch_size, 5]");
    size_t T = x.size(1);  // x is returns  
    
    auto omega_s = params.select(1, 0);
@@ -144,7 +147,7 @@ inline torch::Tensor TFTNGARCHModelImpl::ngarch_eq(const torch::Tensor& params, 
    auto lamda_s = params.select(1, 3);
    auto gamma_s = params.select(1, 4);
 
-   auto rd = r - d;
+   auto rd = r_ - d_;
    torch::Tensor h_t = omega_s;
    torch::Tensor z_t = (x.select(1, 0) - rd + 0.5 * h_t - lamda_s * torch::sqrt(h_t)) / torch::sqrt(h_t);
    std::vector<torch::Tensor> h_l = {h_t};
@@ -198,7 +201,7 @@ inline torch::Tensor TFTNGARCHModelImpl::params_loss(const torch::Tensor& predic
                                                      const torch::Tensor& returns, 
                                                      const torch::Tensor& true_variances)
 {
-    auto predicted_variances = (ngarch_eq(predicted_params, returns.squeeze())).unsqueeze(2);
+    auto predicted_variances = (ngarch_eq(predicted_params, returns.squeeze(-1))).unsqueeze(2);
     auto loss = (losses::huber_per_batch(predicted_variances, true_variances)).mean();
     
     return loss;

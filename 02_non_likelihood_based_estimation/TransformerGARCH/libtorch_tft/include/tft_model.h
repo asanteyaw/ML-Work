@@ -48,7 +48,8 @@ private:
     GatedResidualNetwork static_context_state_c_;
     
     // LSTM encoder-decoder
-    torch::nn::LSTM lstm_;
+    torch::nn::LSTM lstm_{nullptr};
+    torch::nn::LSTM decoder_lstm_{nullptr};
     
     // Gating for skip connections
     GatedLinearUnit lstm_gate_;

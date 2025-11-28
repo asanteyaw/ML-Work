@@ -5,6 +5,7 @@ cmake-build-*/
 out/
 
 # CMake files
+cmake/LocalConfig.cmake
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake

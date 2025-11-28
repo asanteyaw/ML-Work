@@ -109,6 +109,13 @@ TemporalFusionTransformerImpl::TemporalFusionTransformerImpl(const TFTConfig& co
             .batch_first(true)
             .dropout(0.0)
     ));
+    // Decoder LSTM for true encoder-decoder TFT
+    decoder_lstm_ = register_module("decoder_lstm", torch::nn::LSTM(
+        torch::nn::LSTMOptions(config_.hidden_layer_size, config_.hidden_layer_size)
+            .num_layers(1)
+            .batch_first(true)
+            .dropout(0.0)
+    ));
     
     // Gating layers
     lstm_gate_ = register_module("lstm_gate", 
@@ -220,6 +227,14 @@ TemporalFusionTransformerImpl::get_tft_embeddings(torch::Tensor all_inputs) {
 
 std::pair<torch::Tensor, torch::Tensor>
 TemporalFusionTransformerImpl::static_combine_and_mask(torch::Tensor embedding) {
+    if (!static_vsn_) {
+        // No static inputs: produce zero context and dummy weights
+        auto batch = embedding.size(0);
+        auto hidden = config_.hidden_layer_size;
+        auto static_vec = torch::zeros({batch, hidden}, embedding.options());
+        auto weights = torch::zeros({batch, 1}, embedding.options());
+        return {static_vec, weights};
+    }
     auto [static_vec, static_weights] = static_vsn_(embedding);
     return std::make_pair(static_vec, static_weights);
 }
@@ -272,8 +287,15 @@ TemporalFusionTransformerImpl::forward(torch::Tensor inputs) {
     
     auto [history_lstm, hidden_states] = lstm_->forward(historical_features, 
                                                        std::make_tuple(initial_h, initial_c));
-    auto [future_lstm, _] = lstm_->forward(future_features, hidden_states);
-    
+    torch::Tensor future_lstm;
+    if (future_features.size(1) > 0) {
+        auto [dec_out, dec_state] = decoder_lstm_->forward(future_features, hidden_states);
+        future_lstm = dec_out;
+    } else {
+        // No decoder horizon: create zero-length tensor
+        future_lstm = torch::zeros({history_lstm.size(0), 0, history_lstm.size(2)},
+                                   history_lstm.options());
+    }
     // Combine LSTM outputs
     auto lstm_outputs = torch::cat({history_lstm, future_lstm}, 1);
     

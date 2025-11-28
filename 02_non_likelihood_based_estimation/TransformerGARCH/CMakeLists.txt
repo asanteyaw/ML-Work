@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.18)
 
-set(CMAKE_C_COMPILER "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang")
-set(CMAKE_CXX_COMPILER "/Users/yawasante/software/miniconda3/envs/cpp_env/bin/clang++")
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# Optional local override for private compiler settings (not committed to GitHub)
+if(EXISTS "${CMAKE_SOURCE_DIR}/cmake/LocalConfig.cmake")
+    include("${CMAKE_SOURCE_DIR}/cmake/LocalConfig.cmake")
+endif()
 
 project(tft_ngarch)
 

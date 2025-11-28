@@ -2,6 +2,7 @@
 #include <torch/torch.h>
 #include <stdexcept>
 #include <cmath>
+#include <algorithm>
 
 namespace tft {
 
@@ -33,12 +34,6 @@ torch::Tensor get_decoder_mask(torch::Tensor inputs) {
     return mask;
 }
 
-// LinearLayerImpl
-LinearLayerImpl::LinearLayerImpl()
-    : linear_(nullptr),
-      use_time_distributed_(false),
-      activation_("") {
-}
 
 LinearLayerImpl::LinearLayerImpl(int input_size, int output_size, 
                                 bool use_time_distributed, bool use_bias,
@@ -249,13 +244,30 @@ VariableSelectionNetworkImpl::VariableSelectionNetworkImpl(int input_size, int n
                                                           float dropout_rate, bool use_time_distributed,
                                                           torch::Tensor additional_context)
     : num_inputs_(num_inputs),
-      selection_weights_grn_(register_module("selection_grn", GatedResidualNetwork(input_size * num_inputs, hidden_size, num_inputs, dropout_rate, use_time_distributed, false))),
+      selection_weights_grn_(nullptr),
       use_time_distributed_(use_time_distributed) {
-    
-    // Create GRN for each input variable
-    for (int i = 0; i < num_inputs; ++i) {
-        input_grns_.push_back(register_module("input_grn_" + std::to_string(i), 
-            GatedResidualNetwork(hidden_size, hidden_size, hidden_size, dropout_rate, use_time_distributed, false)));
+    // Safeguard: avoid constructing GRNs with zero-sized inputs.
+    // If num_inputs or input_size are zero, we still build a minimal, valid
+    // selection network with effective sizes >= 1. Forward() will only use
+    // as many GRNs as there are real inputs, so this does not break autograd.
+    int effective_num_inputs = std::max(num_inputs, 1);
+    int effective_input_size = std::max(input_size, 1);
+
+    selection_weights_grn_ = register_module(
+        "selection_grn",
+        GatedResidualNetwork(effective_input_size * effective_num_inputs,
+                             hidden_size,
+                             effective_num_inputs,
+                             dropout_rate,
+                             use_time_distributed,
+                             false));
+
+    // Create GRN for each (effective) input variable
+    for (int i = 0; i < effective_num_inputs; ++i) {
+        input_grns_.push_back(register_module(
+            "input_grn_" + std::to_string(i),
+            GatedResidualNetwork(hidden_size, hidden_size, hidden_size,
+                                 dropout_rate, use_time_distributed, false)));
     }
 }
 
@@ -264,7 +276,24 @@ std::pair<torch::Tensor, torch::Tensor> VariableSelectionNetworkImpl::forward(to
     auto batch_size = original_shape[0];
     auto time_steps = use_time_distributed_ ? original_shape[1] : 1;
     auto embedding_dim = use_time_distributed_ ? original_shape[2] : original_shape[1];
-    auto num_inputs = original_shape[-1];
+    auto num_inputs = original_shape.back();
+
+    // Guard against zero-input case to avoid segfaults.
+    if (num_inputs == 0) {
+        // Create a zero output matching TFT expectations.
+        torch::Tensor output;
+        torch::Tensor weights;
+
+        if (use_time_distributed_) {
+            output = torch::zeros({batch_size, time_steps, embedding_dim}, inputs.options());
+            weights = torch::zeros({batch_size, time_steps, 1}, inputs.options());
+        } else {
+            output = torch::zeros({batch_size, embedding_dim}, inputs.options());
+            weights = torch::zeros({batch_size, 1}, inputs.options());
+        }
+
+        return std::make_pair(output, weights);
+    }
     
     // Flatten inputs for selection weight computation
     torch::Tensor flatten;

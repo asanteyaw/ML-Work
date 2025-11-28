@@ -1,17 +1,8 @@
 #include <iostream>
-#include <fstream>
-#include <sstream>
 #include <vector>
-#include <fmt/format.h>
-#include <pybind11/embed.h> 
-#include <pybind11/numpy.h>
-#include <pybind11/stl.h>
-#include "../include/Model.h"
-#include "../include/utils.h"
+#include "Model.h"
+#include "utils.h"
 
-namespace py = pybind11;
-
-using torch::indexing::Slice;
 
 int main() {
 
@@ -19,10 +10,7 @@ int main() {
    torch::Device device(cuda_available ? torch::kCPU : torch::kCPU);
    std::cout << (cuda_available ? "CUDA available. Training on GPU." : "Training on CPU.") << '\n';
 
-   torch::manual_seed(1);
-
-   fmt::print("Training Enc-Dec Model!!\n");
-  
+   torch::manual_seed(1);  
    
    const std::string c_path = "../checkpoints/ngarch/synthetic/ml/";
    const std::string t_path = "../losses/ngarch_loss2.csv";
@@ -34,13 +22,6 @@ int main() {
    std::vector<float> loss_vals{};
 
    size_t n_batch = 50'000; // Number of rows
-   //torch::Tensor true_params = torch::cat({
-        //generate_random_values(0.000121, 0.000324, n_batch).unsqueeze(1),     // Column 1(omega)
-        //generate_random_values(0.035, 0.047, n_batch).unsqueeze(1),    // Column 2(alpha)
-        //generate_random_values(0.85, 0.95, n_batch).unsqueeze(1),    // Column 3(phi)
-        //generate_random_values(0.045, 0.057, n_batch).unsqueeze(1),    // Column 4(lamda)
-        //generate_random_values(-2.0, -0.7, n_batch).unsqueeze(1)  // Column 5(gamma)
-   //}, 1); // Concatenate along dimension 1 (columns)
    
    // Initialize the Econometric model
    auto model = EconometricModel(vol_type, n_batch);

@@ -9,7 +9,7 @@ namespace tft {
 // Linear layer with optional time distribution
 class LinearLayerImpl : public torch::nn::Module {
 public:
-    LinearLayerImpl();  // Default constructor
+    LinearLayerImpl() : linear_(nullptr), use_time_distributed_(false), activation_("") {}
     LinearLayerImpl(int input_size, int output_size, 
                    bool use_time_distributed = false, 
                    bool use_bias = true,
@@ -27,6 +27,7 @@ TORCH_MODULE(LinearLayer);
 // Multi-Layer Perceptron
 class MLPImpl : public torch::nn::Module {
 public:
+    MLPImpl() : hidden_layer_(nullptr), output_layer_(nullptr) {}
     MLPImpl(int input_size, int hidden_size, int output_size,
            const std::string& hidden_activation = "tanh",
            const std::string& output_activation = "",
@@ -43,6 +44,7 @@ TORCH_MODULE(MLP);
 // Gated Linear Unit (GLU)
 class GatedLinearUnitImpl : public torch::nn::Module {
 public:
+    GatedLinearUnitImpl() : dropout_(nullptr), activation_layer_(nullptr), gated_layer_(nullptr), dropout_rate_(0.0f) {}
     GatedLinearUnitImpl(int input_size, int hidden_size, 
                        float dropout_rate = 0.0f,
                        bool use_time_distributed = true,
@@ -61,6 +63,7 @@ TORCH_MODULE(GatedLinearUnit);
 // Add and Norm layer
 class AddAndNormImpl : public torch::nn::Module {
 public:
+    AddAndNormImpl() : layer_norm_(nullptr) {}
     AddAndNormImpl(int normalized_shape);
     
     torch::Tensor forward(const std::vector<torch::Tensor>& inputs);
@@ -73,6 +76,7 @@ TORCH_MODULE(AddAndNorm);
 // Gated Residual Network (GRN)
 class GatedResidualNetworkImpl : public torch::nn::Module {
 public:
+    GatedResidualNetworkImpl() : skip_layer_(nullptr), fc1_(nullptr), fc2_(nullptr), glu_(nullptr), add_and_norm_(nullptr), output_size_(-1), has_skip_(false), return_gate_(false) {}
     GatedResidualNetworkImpl(int input_size, int hidden_size, 
                             int output_size = -1,
                             float dropout_rate = 0.0f,
@@ -97,7 +101,8 @@ TORCH_MODULE(GatedResidualNetwork);
 // Scaled Dot Product Attention
 class ScaledDotProductAttentionImpl : public torch::nn::Module {
 public:
-    ScaledDotProductAttentionImpl(float dropout_rate = 0.0f);
+    ScaledDotProductAttentionImpl() : dropout_(nullptr) {}
+    explicit ScaledDotProductAttentionImpl(float dropout_rate);
     
     std::pair<torch::Tensor, torch::Tensor> forward(torch::Tensor q, torch::Tensor k, 
                                                     torch::Tensor v, torch::Tensor mask = {});
@@ -110,6 +115,16 @@ TORCH_MODULE(ScaledDotProductAttention);
 // Interpretable Multi-Head Attention
 class InterpretableMultiHeadAttentionImpl : public torch::nn::Module {
 public:
+    InterpretableMultiHeadAttentionImpl()
+        : num_heads_(0),
+          d_k_(0),
+          d_v_(0),
+          dropout_rate_(0.0f),
+          qs_layers_(),
+          ks_layers_(),
+          vs_layers_(),
+          attention_(nullptr),
+          w_o_(nullptr) {}
     InterpretableMultiHeadAttentionImpl(int num_heads, int d_model, float dropout_rate = 0.0f);
     
     std::pair<torch::Tensor, torch::Tensor> forward(torch::Tensor q, torch::Tensor k, 
@@ -131,6 +146,7 @@ TORCH_MODULE(InterpretableMultiHeadAttention);
 // Variable Selection Network
 class VariableSelectionNetworkImpl : public torch::nn::Module {
 public:
+    VariableSelectionNetworkImpl() : num_inputs_(0), selection_weights_grn_(nullptr), use_time_distributed_(false) {}
     VariableSelectionNetworkImpl(int input_size, int num_inputs, int hidden_size,
                                 float dropout_rate = 0.0f, 
                                 bool use_time_distributed = false,
