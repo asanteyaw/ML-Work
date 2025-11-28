@@ -17,18 +17,21 @@ ML-Work/
 │   └── README.md
 │
 ├── 01_vol_nn_integration/
-│   ├── python/
-│   ├── experiments/
-│   ├── figures/
+│   ├── include/
+│   ├── src/
+│   ├── models/
+│   ├── CMakeLists.txt
 │   └── README.md
 │
 └── 02_non_likelihood/
     ├── include/
     ├── src/
+    ├── CMakeLists.txt
     └── README.md
 ```
 
-Each directory contains its own README describing objectives, methodology, and instructions.
+Each directory contains its own README describing objectives, methodology, and instructions. The directory structure may change
+due to growing commits.
 
 ---
 
@@ -51,7 +54,7 @@ A research‑oriented project developing neural extensions of classic volatility
 - Component HN (CHN)
 - Neural augmentation via GRU/LSTM layers
 - Fully differentiable likelihood‑based estimation
-- SciPy‑based benchmark estimation (HN/CHN)
+- Libtorch based benchmark estimation (HN/CHN)
 - Monte Carlo simulation for pricing and forecasting
 
 This project merges econometric models with neural sequence models, enabling richer volatility dynamics and end‑to‑end statistical estimation.
@@ -61,7 +64,7 @@ This project merges econometric models with neural sequence models, enabling ric
 ### **02_non_likelihood**
 A sandbox focused on alternative estimation and inference paradigms outside traditional maximum likelihood.  
 This may include:
-- Encoder-Decoder model of recurrent network
+- Temporal Fusion transformer model
 - Novel loss functions
 - Simulation‑based or likelihood‑free approaches
 - Robust / heavy‑tail models
