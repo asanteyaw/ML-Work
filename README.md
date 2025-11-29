@@ -1,7 +1,16 @@
 # ML‑Work
 
+This repository contains a collection of **quantitative‑finance and machine‑learning research projects** developed as part of ongoing research and experimentation workflow in **stochastic volatility, forecasting, risk modeling, and numerical methods**. 
 This repository contains a collection of machine‑learning and quantitative‑finance projects developed as part of an ongoing research and experimentation workflow.  
-Each sub‑project inside **ML‑Work** is self‑contained, well‑structured, and focused on a specific modelling or statistical problem. The goal of the repository is to maintain clear, reproducible, and well‑documented workflows across multiple research streams.
+Each sub‑project inside **ML‑Work** is self‑contained, well‑structured, and focused on a specific modelling or statistical problem. The goal of the repository is to maintain clear, reproducible, and well‑documented workflows in both Python and C++ (LibTorch) across multiple research streams.
+
+The repository reflects active research in:
+- volatility forecasting and regime modeling  
+- hybrid ML–quant neural architectures  
+- neural volatility integration  
+- calibration and estimation (MLE and likelihood‑free)  
+- Monte Carlo simulation and derivative pricing  
+- sequence models (GRU, LSTM, TCN, Transformers)
 
 ---
 
@@ -44,13 +53,12 @@ due to growing commits.
 ## 📌 Project Summaries
 
 ### **00_term_deposit**
-A classical supervised learning problem based on a well‑known Portuguese bank marketing dataset.  
-The objective is to classify whether a client will subscribe to a term deposit (`yes`/`no`).  
-This project explores:
-- Feature engineering (categorical encoding, campaign variables)
-- Baseline models (Logistic Regression, Random Forest)
-- Advanced models (XGBoost / Neural Networks)
-- Model interpretability and campaign strategy insights
+A classical supervised‑learning workflow used to validate ML tooling and ensure consistent feature‑engineering, model evaluation, and interpretability workflows before applying similar techniques to financial time‑series tasks.
+
+Explores:
+- categorical encoding and feature engineering  
+- baseline + advanced ML models (LogReg, RF, XGBoost, NN)  
+- interpretability methods and validation strategy  
 
 ---
 
@@ -108,4 +116,6 @@ Use and distribution should follow the terms described in each subfolder (if pre
 ---
 
 ## 👨🏾‍💻 Author
-Maintained as part of a broader research work in quantitative finance and machine‑learning applications.
+Maintained as part of ongoing research in **quantitative finance, stochastic modeling, and applied machine learning**.
+
+
