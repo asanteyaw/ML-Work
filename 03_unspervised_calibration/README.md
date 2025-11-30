@@ -1,5 +1,3 @@
-
-
 # Unsupervised Heston Calibration via TCN–GRU Latent Volatility Model
 
 This module implements a **fully unsupervised joint calibration procedure** for the Heston stochastic volatility model using:
@@ -18,7 +16,7 @@ The goal is to infer the *entire latent volatility path* without any Kalman filt
 
 ---
 
-## 📌 Project Structure
+## Project Structure
 
 ```
 04_unspervised_calibration/
@@ -28,11 +26,9 @@ The goal is to infer the *entire latent volatility path* without any Kalman filt
 └── (expected) cos_pricers.py
 ```
 
-You provide `sv_models.py` and `cos_pricers.py` from your thesis codebase.
-
 ---
 
-## 🔧 Core Components
+## Core Components
 
 ### 1. **LatentVolatilityModel**
 A neural model that converts an input sequence (e.g., returns) into a variance path:
@@ -55,7 +51,7 @@ A ready-made function for one optimization step using PyTorch.
 
 ---
 
-## 📘 How to Use in a Jupyter Notebook
+## How to Use in a Jupyter Notebook
 
 ### 1. Import the components
 ```python
@@ -107,9 +103,9 @@ print(metrics)
 
 ---
 
-## 🧠 Customization Points
+## Customization Points
 
-You must adapt three functions in `JointHestonLoss` to your thesis code:
+You must adapt three functions in `JointHestonLoss` to your code:
 
 1. **returns_loglik** — should call your Heston under-P transition density.
 2. **cir_dynamics_penalty** — can be replaced with exact CIR conditional moment penalties (see your `sv_models.py`).
@@ -117,20 +113,14 @@ You must adapt three functions in `JointHestonLoss` to your thesis code:
 
 ---
 
-## 🎯 Purpose in the Thesis
+## Purpose of Approach
 
-This module supports the experimental chapter on:
-- Hybrid ML–SDE calibration
-- Latent volatility learning
-- Joint risk-premium estimation
-- COS-based option calibration via differentiable volatility paths
-
-The approach differs from classical filtering methods and demonstrates how deep sequence models can act as **implicit latent-variable models** for stochastic processes.
+This module demonstrates how deep sequence models can act as **implicit latent-variable models** for stochastic processes.
 
 ---
 
-## 📬 Contact
-For issues, debugging, or integration questions, refer to your thesis notes or consult with the supervisor regarding numerical implementation differences.
+## Contact
+For issues, debugging, or integration questions, drop me a note.
 # Unsupervised Heston Calibration via TCN–GRU Latent Volatility Model
 
 This module provides a **complete framework** for performing *unsupervised joint calibration* of the Heston stochastic volatility model using:
@@ -147,7 +137,7 @@ This README explains **exactly how to install dependencies**, **run experiments*
 
 ---
 
-# 📦 Installation & Environment Setup
+# Installation & Environment Setup
 
 ## 1. Navigate into the project folder
 ```bash
@@ -182,10 +172,10 @@ You will now be able to select **heston-env** inside Jupyter.
 
 ---
 
-# 🧠 Project Structure
+# Project Structure
 
 ```
-04_unspervised_calibration/
+04_unsupervised_calibration/
 ├── vol_calib.py          # Main model: TCN encoder + GRU decoder + joint loss
 ├── README.md             # This file
 ├── requirements.txt      # Dependencies
@@ -195,7 +185,7 @@ You will now be able to select **heston-env** inside Jupyter.
 
 ---
 
-# 🔧 Core Components (in `vol_calib.py`)
+# Core Components (in `vol_calib.py`)
 
 ## **1. LatentVolatilityModel**
 A neural model mapping input sequences to variance paths:
@@ -270,7 +260,7 @@ Returns:
 
 ---
 
-# 📘 Running the Model in Jupyter Notebook
+# Running the Model in Jupyter Notebook
 
 Open a notebook:
 ```bash
@@ -324,7 +314,7 @@ metrics
 
 ---
 
-# 📊 Data Format Requirements
+# Data Format Requirements
 
 ### Inputs to the model:
 - `x`: `(batch, T, input_dim)`
@@ -344,22 +334,22 @@ Everything must be PyTorch tensors.
 
 ---
 
-# 🛠 Customization Guide (VERY IMPORTANT)
+# Customization Guide (VERY IMPORTANT)
 
-You must modify three functions in `JointHestonLoss` to match your thesis code:
+You must modify three functions in `JointHestonLoss` to match your code:
 
-## 1️⃣ returns_loglik
+## returns_loglik
 Replace the Gaussian proxy with your **Heston QE/Euler** transition:
 - Use `simulate_under_P`
 - Include equity risk premium parameter `xi_s`
 - Use conditional density of log returns given `v_t`
 
-## 2️⃣ cir_dynamics_penalty
+## cir_dynamics_penalty
 Replace finite-difference residual with CIR moment-based penalty:
 - Use `moments_CIR`
 - Penalize deviations from conditional mean and variance of the CIR process
 
-## 3️⃣ option_pricing_penalty
+## 3️option_pricing_penalty
 Must:
 - Convert P → Q parameters using `xi_v`
 - Construct `qpar` object used by `cos_pricers`
@@ -369,7 +359,7 @@ These 3 functions allow **tight integration with your existing Heston/Bates code
 
 ---
 
-# 🚀 Advanced Usage (Recommended for Thesis)
+# Advanced Usage (Recommended)
 
 - Add additional features: IV slices, VIX proxies, realized kernels
 - Add attention inside the encoder (TCN → Attention → Latent → GRU)
@@ -379,7 +369,7 @@ These 3 functions allow **tight integration with your existing Heston/Bates code
 
 ---
 
-# 🧪 Debugging Tips
+# Debugging Tips
 
 - Start with **returns-only** training (no options) to stabilize the decoder
 - Verify variance positivity after decoding
@@ -389,10 +379,5 @@ These 3 functions allow **tight integration with your existing Heston/Bates code
 
 ---
 
-# 📝 License
-This project is part of the author's doctoral thesis. Redistribution may require supervisor approval.
-
----
-
-# 📬 Contact
-For troubleshooting, ask the thesis supervisor or contact the author.
+# License
+---</file>
