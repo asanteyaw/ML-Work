@@ -1,14 +1,14 @@
 # cos_pricers.py (minimal, fully vectorized, de-bloated)
 # -----------------------------------------------------------------------------
-# Vectorized COS pricing & Greeks for Heston and Bates under a chosen ELMM Q.
+# Vectorized COS pricing & Greeks for Heston under a chosen ELMM Q.
 # Single API for both scalar and batch inputs — everything broadcasts.
-# No imports from sv_models; qpar/bq are duck-typed containers.
+# No imports from sv_models; qpar is a duck-typed container.
 # Exports:
 #   - u_and_greeks_COS(model, S, v, tau, qpar, K, N=512, L=12.0)
 #   - price_call_COS / price_put_COS / price_straddle_COS
 #   - Compatibility wrappers:
-#       heston_u_and_greeks_COS_paths, bates_u_and_greeks_COS_paths
-#       heston_call_u_and_greeks_vec,  bates_call_u_and_greeks_vec
+#       heston_u_and_greeks_COS_paths
+#       heston_call_u_and_greeks_vec
 # -----------------------------------------------------------------------------
 
 from typing import Tuple, Literal
@@ -102,7 +102,7 @@ def _Uk_shift_call(a: float, b: float, K: np.ndarray, N: int) -> Tuple[np.ndarra
 
 
 # =========================
-#   Vectorized COS: price & (∂S, ∂v) for CALL under Heston/Bates
+#   Vectorized COS: price & (∂S, ∂v) for CALL under Heston
 # =========================
 
 def u_and_greeks_COS(
@@ -119,13 +119,12 @@ def u_and_greeks_COS(
 
     Inputs
     ------
-    model : "heston" | "bates"
+    model : "heston"
     S     : (...,) spot(s) at current time t
     v     : (...,) variance state(s)
     tau   : time-to-maturity (scalar)
-    qpar  : HestonQ-like for heston, BatesQ-like for bates
-            - heston: fields kappa_Q, theta_Q, sigma, rho, v0, rates.{r,q}
-            - bates : object with .heston (above) and .jump.{m1, psi(u)}
+    qpar  : HestonQ-like for heston
+            - fields kappa_Q, theta_Q, sigma, rho, v0, rates.{r,q}
     K     : (...,) strike(s) — broadcastable to S/v
     N, L  : COS parameters
 
@@ -148,22 +147,13 @@ def u_and_greeks_COS(
     n = S_vec.size
 
     # Extract Heston-like parameters for truncation and continuous part
-    if model == "heston":
-        hq = qpar
-        kappa = float(hq.kappa_Q); theta = float(hq.theta_Q)
-        sigma = float(hq.sigma);    rho   = float(hq.rho)
-        r = float(hq.rates.r);      q = float(hq.rates.q)
-        vbar0 = float(getattr(hq, "v0", 0.0))
-        m1 = 0.0
-        jump_psi = None
-    else:  # bates
-        hq = qpar.heston
-        kappa = float(hq.kappa_Q); theta = float(hq.theta_Q)
-        sigma = float(hq.sigma);    rho   = float(hq.rho)
-        r = float(hq.rates.r);      q = float(hq.rates.q)
-        vbar0 = float(getattr(hq, "v0", 0.0))
-        m1 = float(getattr(qpar.jump, "m1", 0.0))
-        jump_psi = qpar.jump.psi  # function of u
+    if model != "heston":
+        raise ValueError("This version of cos_pricers only supports model='heston'.")
+    hq = qpar
+    kappa = float(hq.kappa_Q); theta = float(hq.theta_Q)
+    sigma = float(hq.sigma);    rho   = float(hq.rho)
+    r = float(hq.rates.r);      q = float(hq.rates.q)
+    vbar0 = float(getattr(hq, "v0", 0.0))
 
     # Truncation interval from cumulants (path-independent)
     c1, c2 = _cumulants_heston(kappa, theta, sigma, vbar0, rho, r, q, tau)
@@ -172,16 +162,14 @@ def u_and_greeks_COS(
     # COS payoff coeffs for all strikes (vectorized over K)
     U_k, shift, u = _Uk_shift_call(a, b, K_vec, N)  # (n,N), (n,N), (N,)
 
-    # Affine continuous part (correct r-q by m1 for Bates)
-    C, D = _heston_C_D(tau, u, kappa, theta, sigma, rho, (r - q) - m1)
+    # Affine continuous part (correct r-q)
+    C, D = _heston_C_D(tau, u, kappa, theta, sigma, rho, (r - q))
 
-    # Build CF φ for each path: exp(C + D v + i u ln S) * jump-term(if Bates)
+    # Build CF φ for each path: exp(C + D v + i u ln S)
     x = np.log(np.maximum(S_vec, 1e-300))[:, None]  # (n,1)
     vv = v_vec[:, None]                              # (n,1)
 
     base = np.exp(C[None, :] + D[None, :] * vv + 1j * u[None, :] * x)  # (n,N)
-    if model == "bates":
-        base = base * np.exp(tau * jump_psi(u))[None, :]
 
     # Common real part with strike shift
     Re = np.real(base * shift)                       # (n,N)
@@ -210,20 +198,23 @@ def price_call_COS(model: Literal["heston", "bates"], S, v, tau, qpar, K, N=512,
     return p
 
 def price_put_COS(model: Literal["heston", "bates"], S, v, tau, qpar, K, N=512, L=12.0):
-    """Put via parity: P = C - S e^{-qτ} + K e^{-rτ} (vectorized)."""
-    if model == "heston":
-        r = float(qpar.rates.r); qv = float(qpar.rates.q)
-    else:
-        r = float(qpar.heston.rates.r); qv = float(qpar.heston.rates.q)
+    """Put via parity: P = C - S e^{-qτ} + K e^{-rτ} (vectorized).
+
+    Note: this version only supports Heston; passing model != 'heston'
+    will raise a ValueError.
+    """
+    if model != "heston":
+        raise ValueError("This version of cos_pricers only supports model='heston'.")
+    r = float(qpar.rates.r); qv = float(qpar.rates.q)
     C = price_call_COS(model, S, v, tau, qpar, K, N=N, L=L)
     return C - np.asarray(S, float) * np.exp(-qv * tau) + np.asarray(K, float) * np.exp(-r * tau)
 
 def price_straddle_COS(model: Literal["heston", "bates"], S, v, tau, qpar, K, N=512, L=12.0):
+    """Straddle price = Call + Put, Heston only."""
+    if model != "heston":
+        raise ValueError("This version of cos_pricers only supports model='heston'.")
     C = price_call_COS(model, S, v, tau, qpar, K, N=N, L=L)
-    if model == "heston":
-        r = float(qpar.rates.r); qv = float(qpar.rates.q)
-    else:
-        r = float(qpar.heston.rates.r); qv = float(qpar.heston.rates.q)
+    r = float(qpar.rates.r); qv = float(qpar.rates.q)
     P = C - np.asarray(S, float) * np.exp(-qv * tau) + np.asarray(K, float) * np.exp(-r * tau)
     return C + P
 
@@ -236,14 +227,6 @@ def heston_u_and_greeks_COS_paths(S_vec, v_vec, tau, qpar, K, N=512, L=12.0):
     """Compat wrapper: returns (price, dS, dv) across paths for Heston."""
     return u_and_greeks_COS("heston", S_vec, v_vec, tau, qpar, K, N=N, L=L)
 
-def bates_u_and_greeks_COS_paths(S_vec, v_vec, tau, bq, K, N=512, L=12.0):
-    """Compat wrapper: returns (price, dS, dv) across paths for Bates."""
-    return u_and_greeks_COS("bates", S_vec, v_vec, tau, bq, K, N=N, L=L)
-
 def heston_call_u_and_greeks_vec(S_vec, v_vec, K, tau, qpar, N=512, L=12.0):
     """Alias expected by older benchmark scripts."""
     return u_and_greeks_COS("heston", S_vec, v_vec, tau, qpar, K, N=N, L=L)
-
-def bates_call_u_and_greeks_vec(S_vec, v_vec, K, tau, bq, N=512, L=12.0):
-    """Alias expected by older benchmark scripts."""
-    return u_and_greeks_COS("bates", S_vec, v_vec, tau, bq, K, N=N, L=L)
