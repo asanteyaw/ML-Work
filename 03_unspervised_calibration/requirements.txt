@@ -1,0 +1,17 @@
+# Core ML
+torch
+numpy
+scipy
+pandas
+matplotlib
+
+# Optional: TCN dependencies
+# (PyTorch >=1.8 already includes dilated Conv1d, so no extras needed)
+
+# Jupyter
+jupyter
+ipykernel
+
+# Utilities
+tqdm
+yfinance
