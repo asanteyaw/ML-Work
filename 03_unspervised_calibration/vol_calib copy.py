@@ -594,7 +594,7 @@ class JointHestonLoss(nn.Module):
 
     def forward(
         self,
-        x: Optional[torch.Tensor],
+        x: torch.Tensor,
         S: torch.Tensor,
         dt: float,
         opt: Optional[OptionBatch] = None,
@@ -619,42 +619,7 @@ class JointHestonLoss(nn.Module):
                 - "dyn_penalty": variance dynamics penalty
                 - "opt_penalty": option pricing penalty (0 if opt is None)
         """
-        # ------------------------------------------
-        # Handle option-only forward (x=None)
-        # ------------------------------------------
-        if x is None:
-            device = S.device
-            dtype = S.dtype
-            v0 = torch.tensor(self.heston_params.v0, device=device, dtype=dtype)
-
-            batch_size = S.shape[0]
-            T = S.shape[1] - 1  # number of variance steps
-
-            # constant variance path
-            v = v0.expand(batch_size, T, 1)
-        else:
-            v = self.latent_model(x)
-
-        # Build Q-measure parameters (always needed for COS)
-        hp = self.heston_params
-        kappa_Q = hp.kappa + hp.xi_v
-        theta_Q = (hp.kappa * hp.theta) / float(kappa_Q)
-
-        class Rates:
-            def __init__(self, r, q):
-                self.r = float(r)
-                self.q = float(q)
-
-        class QParams:
-            def __init__(self, kappa_Q, theta_Q, sigma, rho, v0, r, q):
-                self.kappa_Q = float(kappa_Q)
-                self.theta_Q = float(theta_Q)
-                self.sigma = float(sigma)
-                self.rho = float(rho)
-                self.v0 = float(v0)
-                self.rates = Rates(float(r), float(q))
-
-        qpar = QParams(kappa_Q, theta_Q, hp.sigma, hp.rho, hp.v0, r, q)
+        v = self.latent_model(x)  # (batch, T, 1)
 
         neg_loglik = self.returns_loglik(S=S, v=v, dt=dt)
         dyn_penalty = self.cir_dynamics_penalty(v=v, dt=dt)
@@ -673,16 +638,11 @@ class JointHestonLoss(nn.Module):
         # --------------------------------------------------------------
         # Normalized joint loss (returns & options weighted by sample size)
         # --------------------------------------------------------------
-        # --- Robust handling of x=None and opt=None ---
-        if x is None:
-            M = 0
+        M = x.shape[1]                 # number of return observations (T)
+        if opt is not None:
+            N = opt.K.shape[1]         # number of options
         else:
-            M = x.shape[1]
-
-        if opt is None:
             N = 0
-        else:
-            N = opt.K.shape[1]
 
         # Per-observation averages
         neg_loglik_norm = neg_loglik / M
@@ -702,17 +662,62 @@ class JointHestonLoss(nn.Module):
         )
 
         # Attach model_prices and qpar if option pricing was run
-        # (removed from returned metrics)
-        out = {
+        model_prices = None
+        qpar = None
+        if opt is not None and cos_module is not None:
+            # recompute price_model used inside option_pricing_penalty
+            v_T = v[:, -1, 0]
+            batch_size = v_T.shape[0]
+            price_list = []
+            # Build Q-measure Heston parameters as in option_pricing_penalty
+            hp = self.heston_params
+            kappa_Q = hp.kappa + hp.xi_v
+            theta_Q = (hp.kappa * hp.theta) / float(kappa_Q)
+            class Rates:
+                def __init__(self, r, q):
+                    self.r = r
+                    self.q = q
+            class QParams:
+                def __init__(self, kappa_Q, theta_Q, sigma, rho, v0, r, q):
+                    self.kappa_Q = float(kappa_Q)
+                    self.theta_Q = float(theta_Q)
+                    self.sigma = float(sigma)
+                    self.rho = float(rho)
+                    self.v0 = float(v0)
+                    self.rates = Rates(float(r), float(q))
+            qpar = QParams(
+                kappa_Q=kappa_Q,
+                theta_Q=theta_Q,
+                sigma=hp.sigma,
+                rho=hp.rho,
+                v0=hp.v0,
+                r=r,
+                q=q,
+            )
+            S_batch = opt.S
+            K_batch = opt.K
+            tau_batch = opt.tau
+            for i in range(batch_size):
+                S_i = S_batch[i].unsqueeze(0)
+                v_i = v_T[i].unsqueeze(0)
+                K_i = K_batch[i]
+                tau_i = tau_batch[i,0]
+                price_i = cos_module.price_call_COS(
+                    model="heston", S=S_i, v=v_i, tau=tau_i, qpar=qpar, K=K_i,
+                )
+                if price_i.dim() > 1:
+                    price_i = price_i.reshape(-1)
+                price_list.append(price_i)
+            model_prices = torch.stack(price_list, dim=0)
+
+        return {
             "loss": loss,
             "neg_loglik": neg_loglik.detach(),
             "dyn_penalty": dyn_penalty.detach(),
             "opt_penalty": opt_penalty.detach(),
+            "model_prices": model_prices,
+            "qpar": qpar if opt is not None else None,
         }
-        # Provide qpar for evaluation/plotting when x=None
-        if x is None:
-            out["qpar"] = qpar
-        return out
 
 
 # ---------------------------------------------------------------------------
@@ -756,12 +761,11 @@ def example_training_step(
     optimizer.step()
 
     metrics = {}
-    for k in ("loss", "neg_loglik", "dyn_penalty", "opt_penalty"):
-        v = out.get(k)
+    for k, v in out.items():
         if isinstance(v, torch.Tensor) and v.numel() == 1:
             metrics[k] = float(v.item())
         else:
-            metrics[k] = v
+            metrics[k] = v  # keep tensors/vectors/dicts as-is
     return metrics
 
 
