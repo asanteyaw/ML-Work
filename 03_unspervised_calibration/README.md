@@ -380,4 +380,4 @@ These 3 functions allow **tight integration with your existing Heston/Bates code
 ---
 
 # License
----</file>
+This work is part of the growing repository of rich tools and application of stochastic volatility and ML practice. Redistribution would require approval

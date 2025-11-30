@@ -1,7 +1,7 @@
 """
 Clean Stochastic Volatility Models: Heston and Bates
 
-This module contains lean implementations of the Heston and Bates stochastic volatility models
+This module contains lean implementations of the Heston stochastic volatility model
 with only their native methods including characteristic functions and advanced simulation schemes.
 
 Key Features (Native to Models):

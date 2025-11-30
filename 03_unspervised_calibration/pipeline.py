@@ -1,5 +1,4 @@
 """
-for_notebook.py
 ----------------
 This script contains a FULL end‑to‑end unsupervised Heston calibration
 pipeline designed specifically for copying into a Jupyter Notebook.
@@ -19,7 +18,7 @@ cells:
     11. Plot training loss
     12. Plot variance path
 
-You can copy/paste these blocks directly into a .ipynb file.
+You can copy/paste these blocks directly into a .ipynb file, or import them and use.
 """
 
 # =======================
@@ -463,81 +462,6 @@ def plot_vol_acf(latent_model, x, lags=30):
     plt.ylabel("ACF")
     plt.grid(True)
     plt.show()
-
-# =======================
-# 18. PCA REGIME DETECTION
-# =======================
-from sklearn.decomposition import PCA
-
-def plot_vol_regime(latent_model, x):
-    with torch.no_grad():
-        v = latent_model(x)[0,:,0].cpu().numpy()
-    pca = PCA(n_components=1)
-    regime = pca.fit_transform(v.reshape(-1,1)).flatten()
-    plt.figure(figsize=(10,5))
-    sns.lineplot(x=range(len(regime)), y=regime)
-    plt.title("Latent Volatility Regime Index (PCA)")
-    plt.xlabel("t")
-    plt.ylabel("Regime Index")
-    plt.grid(True)
-    plt.show()
-
-# =======================
-# 19. OUT-OF-SAMPLE OPTION RMSE & IVRMSE
-# =======================
-
-def compute_option_errors(joint_model, opt_batch, cos_module=cos_pricers,
-                          r=0.019, q=0.012):
-    S = opt_batch.S
-    # Ensure S is at least shape (1,2)
-    if S.dim() == 1:
-        S = S.unsqueeze(0)
-    if S.shape[1] == 1:
-        S = torch.cat([S, S], dim=1)
-
-    with torch.no_grad():
-        out = joint_model(x=None, S=S, dt=1/252,
-                          opt=opt_batch, r=r, q=q,
-                          cos_module=cos_pricers)
-        model_prices = out["model_prices"][0].cpu().numpy()
-    market_prices = opt_batch.price[0].cpu().numpy()
-    rmse = np.sqrt(np.mean((model_prices - market_prices)**2))
-    ivrmse = np.sqrt(np.mean(((model_prices - market_prices)/(opt_batch.vega[0].cpu().numpy()))**2))
-    return {"rmse": rmse, "ivrmse": ivrmse}
-
-# =======================
-# 20. VOLATILITY FORECASTING (1-STEP AHEAD)
-# =======================
-
-def forecast_volatility(latent_model, x):
-    with torch.no_grad():
-        v = latent_model(x)[0,:,0].cpu().numpy()
-    # Naive forecast = last value
-    forecast = v[-1]
-    return forecast
-
-# =======================
-# 21. RISK PREMIA ESTIMATION (ERP, VRP)
-# =======================
-
-def estimate_risk_premia(heston_params, realized_returns, learned_vol):
-    # ERP ~ mean(realized returns)
-    erp = float(np.mean(realized_returns))
-
-    # VRP ~ E_Q[v] - E_P[v]
-    # P-measure vol = learned_vol
-    v_p = float(np.mean(learned_vol))
-
-    # Q-measure long-run variance: support both HestonParams(theta) and QParams(theta_Q)
-    if hasattr(heston_params, "theta_Q"):
-        v_q = float(heston_params.theta_Q)
-    elif hasattr(heston_params, "theta"):
-        v_q = float(heston_params.theta)
-    else:
-        raise AttributeError("heston_params has neither 'theta_Q' nor 'theta'")
-
-    vrp = v_q - v_p
-    return {"ERP": erp, "VRP": vrp}
 
 # =======================
 # END OF FILE EXTENSIONS

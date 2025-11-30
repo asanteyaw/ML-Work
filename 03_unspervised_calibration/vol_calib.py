@@ -5,11 +5,6 @@
 Unsupervised latent-volatility model for joint Heston calibration using
 TCN encoder + GRU decoder.
 
-This file is written to integrate *conceptually* with your existing
-`sv_models.py` (Heston/Bates models) and `cos_pricers.py` (COS option
-pricers), but avoids hard-wiring exact signatures so you can adapt it to
-your implementation easily.
-
 High-level design
 -----------------
 - Encoder: TCN over returns (and optionally extra features) -> latent code z
@@ -20,11 +15,6 @@ High-level design
     * Heston dynamics penalty (CIR-consistency),
     * option-pricing penalty via COS under Q.
 
-You can run and extend this inside a Jupyter notebook by importing
-`LatentVolatilityModel` and writing a custom training loop that calls
-into your `HestonModel` and COS pricers.
-
-The bottom of this file includes an example training skeleton.
 """
 
 from __future__ import annotations
