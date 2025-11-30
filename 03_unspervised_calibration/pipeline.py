@@ -424,7 +424,7 @@ def plot_implied_vol_smile(joint_model, opt_batch, x=None, cos_module=cos_pricer
     # -------------------------------------------------------------
     plt.figure(figsize=(10,5))
     sns.lineplot(x=K, y=iv_model, linewidth=2, label="Model IV")
-    plt.title("Model‑Implied Vol Smile (COS)")
+    plt.title("Model-Implied Vol Smile")
     plt.xlabel("Strike")
     plt.ylabel("Implied Volatility")
     plt.grid(True)
