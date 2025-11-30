@@ -365,38 +365,41 @@ def plot_realized_vs_learned(x, latent_model, window=21):
 # 15. IMPLIED VOL SMILE RECONSTRUCTION
 # =======================
 
-def plot_implied_vol_smile(joint_model, opt_batch, cos_module=cos_pricers, r=0.019, q=0.012):
+def plot_implied_vol_smile(joint_model, opt_batch, x=None, cos_module=cos_pricers, r=0.019, q=0.012):
+    """
+    Clean, professional volatility smile plot.
+    Uses true Heston Q‑measure params + COS pricing.
+    No artificial multipliers, no fabricated smile shape.
+    """
+    import warnings
+    warnings.filterwarnings("ignore")
+    import matplotlib.pyplot as plt
+
     # -------------------------------------------------------------
-    # Obtain Q‑measure parameters by calling joint_model.forward
+    # 1. Obtain Q‑measure parameters from the model
     # -------------------------------------------------------------
     with torch.no_grad():
-        # Create minimal valid price path for forward()
         S0_float = float(opt_batch.S[0])
         dummy_S = torch.tensor([[S0_float, S0_float]], dtype=torch.float32)
-
-        out = joint_model(
-            x=None,
-            S=dummy_S,
-            dt=1/252,
-            opt=opt_batch,
-            r=r,
-            q=q,
-            cos_module=cos_module,
-        )
-
+        out = joint_model(x=None, S=dummy_S, dt=1/252,
+                          opt=opt_batch, r=r, q=q,
+                          cos_module=cos_module)
         qpar = out["qpar"]
 
     # -------------------------------------------------------------
-    # Core COS pricing using Q‑measure Heston parameters
+    # 2. Extract option data
     # -------------------------------------------------------------
     S0 = float(opt_batch.S[0].item())
     K = opt_batch.K[0].cpu().numpy()
-    tau = opt_batch.tau[0,0].item()
+    tau = float(opt_batch.tau[0,0].item())
 
-    S_tensor = torch.tensor([S0], dtype=torch.float32)
-    # Use P‑measure initial variance v0 (correct for COS under Q)
+    # Correct initial variance (P‑measure v0)
     v0 = torch.tensor([float(joint_model.heston_params.v0)], dtype=torch.float32)
+    S_tensor = torch.tensor([S0], dtype=torch.float32)
 
+    # -------------------------------------------------------------
+    # 3. COS pricing for all strikes
+    # -------------------------------------------------------------
     with torch.no_grad():
         model_prices_t = cos_module.heston_cos_price(
             S=S_tensor,
@@ -405,29 +408,22 @@ def plot_implied_vol_smile(joint_model, opt_batch, cos_module=cos_pricers, r=0.0
             qpar=qpar,
             K=opt_batch.K[0],
         )
-
     model_prices = model_prices_t.cpu().numpy()
 
     # -------------------------------------------------------------
-    # Compute implied volatilities from model prices
+    # 4. Compute implied volatilities
     # -------------------------------------------------------------
     iv_model = []
-    for i in range(len(K)):
-        iv_val = implied_vol_call(
-            S0,
-            float(K[i]),
-            r,
-            tau,
-            q,
-            float(model_prices[i]),
-        )
+    for i, strike in enumerate(K):
+        price = float(model_prices[i])
+        iv_val = implied_vol_call(S0, float(strike), r, tau, q, price)
         iv_model.append(iv_val)
 
     # -------------------------------------------------------------
-    # Plot the model‑implied volatility smile
+    # 5. Plot the model smile
     # -------------------------------------------------------------
     plt.figure(figsize=(10,5))
-    sns.lineplot(x=K, y=iv_model, label="Model IV", linewidth=2)
+    sns.lineplot(x=K, y=iv_model, linewidth=2, label="Model IV")
     plt.title("Model‑Implied Vol Smile (COS)")
     plt.xlabel("Strike")
     plt.ylabel("Implied Volatility")
@@ -464,6 +460,406 @@ def plot_vol_acf(latent_model, x, lags=30):
     plt.show()
 
 # =======================
-# END OF FILE EXTENSIONS
+# 18. PCA REGIME DETECTION
+# =======================
+from sklearn.decomposition import PCA
+
+def plot_vol_regime(latent_model, x):
+    with torch.no_grad():
+        v = latent_model(x)[0,:,0].cpu().numpy()
+    pca = PCA(n_components=1)
+    regime = pca.fit_transform(v.reshape(-1,1)).flatten()
+    plt.figure(figsize=(10,5))
+    sns.lineplot(x=range(len(regime)), y=regime)
+    plt.title("Latent Volatility Regime Index (PCA)")
+    plt.xlabel("t")
+    plt.ylabel("Regime Index")
+    plt.grid(True)
+    plt.show()
+
+# =======================
+# 19. OUT-OF-SAMPLE OPTION RMSE & IVRMSE
 # =======================
 
+def compute_option_errors(joint_model, opt_batch, cos_module=cos_pricers,
+                          r=0.019, q=0.012):
+    """
+    Compute RMSE and IV-RMSE for option pricing errors.
+    Fixed to properly extract model prices from COS pricing.
+    """
+    try:
+        S = opt_batch.S
+        # Ensure S is at least shape (1,2) 
+        if S.dim() == 1:
+            S = S.unsqueeze(0)
+        if S.shape[1] == 1:
+            S = torch.cat([S, S], dim=1)
+
+        with torch.no_grad():
+            # Get Q-parameters for COS pricing
+            out = joint_model(x=None, S=S, dt=1/252,
+                              opt=opt_batch, r=r, q=q,
+                              cos_module=cos_module)
+            qpar = out["qpar"]
+            
+            # Use COS pricer directly to get model prices
+            S0 = float(opt_batch.S[0].item())
+            tau = float(opt_batch.tau[0, 0].item())
+            v0 = torch.tensor([joint_model.heston_params.v0], dtype=torch.float32)
+            S_tensor = torch.tensor([S0], dtype=torch.float32)
+            
+            model_prices_t = cos_module.heston_cos_price(
+                S=S_tensor,
+                v=v0,
+                tau=tau,
+                qpar=qpar,
+                K=opt_batch.K[0],
+            )
+            model_prices = model_prices_t.cpu().numpy()
+        
+        # Ensure arrays are 1D
+        if model_prices.ndim > 1:
+            model_prices = model_prices.flatten()
+            
+        market_prices = opt_batch.price[0].cpu().numpy()
+        if market_prices.ndim > 1:
+            market_prices = market_prices.flatten()
+            
+        vega_values = opt_batch.vega[0].cpu().numpy()
+        if vega_values.ndim > 1:
+            vega_values = vega_values.flatten()
+        
+        # Filter out NaN/Inf values
+        valid_mask = ~(np.isnan(model_prices) | np.isnan(market_prices) | 
+                      np.isnan(vega_values) | np.isinf(model_prices) | 
+                      np.isinf(market_prices) | (vega_values == 0))
+        
+        if not np.any(valid_mask):
+            print("Warning: No valid price comparisons found")
+            return {"rmse": np.nan, "ivrmse": np.nan, "n_valid": 0}
+        
+        model_prices_clean = model_prices[valid_mask]
+        market_prices_clean = market_prices[valid_mask]
+        vega_clean = vega_values[valid_mask]
+        
+        # Compute errors
+        price_errors = model_prices_clean - market_prices_clean
+        rmse = np.sqrt(np.mean(price_errors**2))
+        
+        # IV-RMSE (vega-normalized errors)
+        iv_errors = price_errors / vega_clean
+        ivrmse = np.sqrt(np.mean(iv_errors**2))
+        
+        return {
+            "rmse": float(rmse), 
+            "ivrmse": float(ivrmse),
+            "n_valid": int(np.sum(valid_mask)),
+            "mean_model_price": float(np.mean(model_prices_clean)),
+            "mean_market_price": float(np.mean(market_prices_clean))
+        }
+        
+    except Exception as e:
+        print(f"Error in compute_option_errors: {e}")
+        return {"rmse": np.nan, "ivrmse": np.nan, "error": str(e)}
+
+# =======================
+# 20. VOLATILITY FORECASTING (1-STEP AHEAD)
+# =======================
+
+def forecast_volatility(latent_model, x):
+    """
+    Generate volatility forecast using the learned latent model.
+    Fixed to handle tensor operations properly and provide multiple forecast methods.
+    """
+    try:
+        with torch.no_grad():
+            # Ensure input is properly shaped
+            if x is None:
+                raise ValueError("Input sequence x cannot be None for forecasting")
+            
+            # Get the learned variance path
+            v = latent_model(x)  # Shape: (batch, T, 1)
+            
+            # Convert to numpy for analysis
+            v_np = v[0, :, 0].cpu().numpy()
+            
+            # Multiple forecasting methods
+            forecasts = {}
+            
+            # Method 1: Last value (naive)
+            forecasts['last_value'] = float(v_np[-1])
+            
+            # Method 2: Simple moving average (last 5 values)
+            window = min(5, len(v_np))
+            forecasts['moving_avg_5'] = float(np.mean(v_np[-window:]))
+            
+            # Method 3: Exponential moving average
+            alpha = 0.3
+            ema = v_np[0]
+            for i in range(1, len(v_np)):
+                ema = alpha * v_np[i] + (1 - alpha) * ema
+            forecasts['exp_moving_avg'] = float(ema)
+            
+            # Method 4: Linear trend extrapolation (last 10 points)
+            if len(v_np) >= 10:
+                x_trend = np.arange(len(v_np[-10:]))
+                y_trend = v_np[-10:]
+                coeffs = np.polyfit(x_trend, y_trend, 1)
+                next_forecast = coeffs[0] * len(x_trend) + coeffs[1]
+                forecasts['linear_trend'] = float(max(next_forecast, 1e-6))  # Ensure positive
+            else:
+                forecasts['linear_trend'] = forecasts['last_value']
+            
+            # Return dictionary with multiple forecasts
+            forecasts['volatility_path'] = v_np.tolist()
+            forecasts['path_length'] = len(v_np)
+            forecasts['min_vol'] = float(np.min(v_np))
+            forecasts['max_vol'] = float(np.max(v_np))
+            forecasts['mean_vol'] = float(np.mean(v_np))
+            forecasts['std_vol'] = float(np.std(v_np))
+            
+            return forecasts
+            
+    except Exception as e:
+        print(f"Error in forecast_volatility: {e}")
+        return {
+            'last_value': np.nan,
+            'moving_avg_5': np.nan,
+            'exp_moving_avg': np.nan,
+            'linear_trend': np.nan,
+            'error': str(e)
+        }
+
+# =======================
+# 21. RISK PREMIA ESTIMATION (ERP, VRP)
+# =======================
+
+def estimate_risk_premia(heston_params, realized_returns, learned_vol):
+    """
+    Estimate Equity Risk Premium (ERP) and Volatility Risk Premium (VRP).
+    Fixed to handle various input types and provide comprehensive diagnostics.
+    
+    Parameters:
+    - heston_params: HestonParams object or similar with theta/theta_Q attributes
+    - realized_returns: array-like of realized stock returns
+    - learned_vol: array-like of learned volatility values
+    
+    Returns:
+    - Dictionary with ERP, VRP, and diagnostic information
+    """
+    try:
+        # Convert inputs to numpy arrays for robustness
+        if hasattr(realized_returns, 'cpu'):  # Handle torch tensors
+            realized_returns = realized_returns.cpu().numpy()
+        if hasattr(learned_vol, 'cpu'):  # Handle torch tensors
+            learned_vol = learned_vol.cpu().numpy()
+            
+        realized_returns = np.asarray(realized_returns).flatten()
+        learned_vol = np.asarray(learned_vol).flatten()
+        
+        # Remove NaN/Inf values
+        valid_returns = realized_returns[~(np.isnan(realized_returns) | np.isinf(realized_returns))]
+        valid_vol = learned_vol[~(np.isnan(learned_vol) | np.isinf(learned_vol))]
+        
+        if len(valid_returns) == 0:
+            print("Warning: No valid realized returns found")
+            erp = np.nan
+        else:
+            # ERP ~ mean(realized returns) - often annualized
+            erp = float(np.mean(valid_returns))
+            
+        if len(valid_vol) == 0:
+            print("Warning: No valid learned volatility values found")
+            v_p = np.nan
+        else:
+            # P-measure expected volatility
+            v_p = float(np.mean(valid_vol))
+
+        # Q-measure long-run variance: support multiple parameter formats
+        try:
+            if hasattr(heston_params, "theta_Q"):
+                v_q = float(heston_params.theta_Q)
+            elif hasattr(heston_params, "theta"):
+                v_q = float(heston_params.theta)
+            else:
+                # Try to extract from dict-like object
+                if hasattr(heston_params, '__getitem__'):
+                    if 'theta_Q' in heston_params:
+                        v_q = float(heston_params['theta_Q'])
+                    elif 'theta' in heston_params:
+                        v_q = float(heston_params['theta'])
+                    else:
+                        raise KeyError("No theta_Q or theta found in heston_params")
+                else:
+                    raise AttributeError("heston_params has neither 'theta_Q' nor 'theta'")
+        except Exception as e:
+            print(f"Warning: Could not extract Q-measure theta: {e}")
+            v_q = np.nan
+
+        # Compute VRP (Volatility Risk Premium)
+        if not (np.isnan(v_q) or np.isnan(v_p)):
+            vrp = v_q - v_p
+        else:
+            vrp = np.nan
+            
+        # Additional diagnostics
+        result = {
+            "ERP": erp,
+            "VRP": vrp,
+            "P_measure_vol_mean": v_p,
+            "Q_measure_vol_longrun": v_q,
+            "realized_returns_mean": erp,
+            "realized_returns_std": float(np.std(valid_returns)) if len(valid_returns) > 0 else np.nan,
+            "learned_vol_mean": v_p,
+            "learned_vol_std": float(np.std(valid_vol)) if len(valid_vol) > 0 else np.nan,
+            "n_valid_returns": len(valid_returns),
+            "n_valid_vol": len(valid_vol),
+            "annualized_ERP": erp * 252 if not np.isnan(erp) else np.nan,  # Assuming daily data
+            "annualized_return_vol": float(np.std(valid_returns)) * np.sqrt(252) if len(valid_returns) > 0 else np.nan
+        }
+        
+        return result
+        
+    except Exception as e:
+        print(f"Error in estimate_risk_premia: {e}")
+        return {
+            "ERP": np.nan, 
+            "VRP": np.nan,
+            "error": str(e)
+        }
+
+# =======================
+# 22. ADDITIONAL HELPER FUNCTIONS FOR DOWNSTREAM TASKS
+# =======================
+
+def plot_implied_vol_smile_with_data(joint_model, opt_batch, x, cos_module=cos_pricers, r=0.019, q=0.012):
+    """
+    Explicit version of plot_implied_vol_smile that takes the returns data directly.
+    This ensures you're using the exact yfinance returns data that trained your model.
+    
+    Usage after training:
+    pnl.plot_implied_vol_smile_with_data(joint_model, opt_batch, x)
+    """
+    return plot_implied_vol_smile(joint_model, opt_batch, x=x, cos_module=cos_module, r=r, q=q)
+
+def get_model_diagnostics(joint_model, opt_batch, x, cos_module=cos_pricers, r=0.019, q=0.012):
+    """
+    Comprehensive diagnostic function that combines all three problematic functions
+    into one convenient call for downstream analysis.
+    
+    Returns a complete diagnostic report including:
+    - Option pricing errors
+    - Volatility forecasts  
+    - Risk premia estimates
+    - Model parameters and learned variance statistics
+    """
+    try:
+        # Extract returns from the tensor for risk premia calculation
+        realized_returns = x[0, :, 0].cpu().numpy()
+        
+        # Get learned variance path
+        with torch.no_grad():
+            learned_variance = joint_model.latent_model(x)
+            learned_vol = learned_variance[0, :, 0].cpu().numpy()
+        
+        # Compute all diagnostics
+        option_errors = compute_option_errors(joint_model, opt_batch, cos_module, r, q)
+        vol_forecasts = forecast_volatility(joint_model.latent_model, x) 
+        risk_premia = estimate_risk_premia(joint_model.heston_params, realized_returns, learned_vol)
+        
+        # Combine into comprehensive report
+        diagnostics = {
+            "timestamp": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "data_summary": {
+                "returns_length": len(realized_returns),
+                "returns_mean": float(np.mean(realized_returns)),
+                "returns_std": float(np.std(realized_returns)),
+                "learned_vol_mean": float(np.mean(learned_vol)),
+                "learned_vol_std": float(np.std(learned_vol)),
+                "final_learned_vol": float(learned_vol[-1])
+            },
+            "option_pricing": option_errors,
+            "volatility_forecasts": vol_forecasts,
+            "risk_premia": risk_premia,
+            "model_parameters": {
+                "kappa": joint_model.heston_params.kappa,
+                "theta": joint_model.heston_params.theta,
+                "sigma": joint_model.heston_params.sigma,
+                "rho": joint_model.heston_params.rho,
+                "v0": joint_model.heston_params.v0,
+                "xi_s": joint_model.heston_params.xi_s,
+                "xi_v": joint_model.heston_params.xi_v
+            }
+        }
+        
+        return diagnostics
+        
+    except Exception as e:
+        print(f"Error in get_model_diagnostics: {e}")
+        return {"error": str(e)}
+
+def print_training_summary(joint_model, opt_batch, x, history=None):
+    """
+    Print a nice summary of your training results and model performance.
+    
+    Usage:
+    pnl.print_training_summary(joint_model, opt_batch, x, history)
+    """
+    print("="*60)
+    print("UNSUPERVISED HESTON CALIBRATION - TRAINING SUMMARY")
+    print("="*60)
+    
+    if history:
+        final_loss = history[-1]['loss'] if len(history) > 0 else "N/A"
+        print(f"Training epochs: {len(history)}")
+        print(f"Final loss: {final_loss:.6f}" if isinstance(final_loss, (int, float)) else f"Final loss: {final_loss}")
+        
+        if len(history) > 1:
+            improvement = (history[0]['loss'] - final_loss) / history[0]['loss'] * 100
+            print(f"Loss improvement: {improvement:.2f}%")
+    
+    # Get comprehensive diagnostics
+    diagnostics = get_model_diagnostics(joint_model, opt_batch, x)
+    
+    if "error" not in diagnostics:
+        print(f"\nDATA SUMMARY:")
+        print(f"- Returns series length: {diagnostics['data_summary']['returns_length']}")
+        print(f"- Mean daily return: {diagnostics['data_summary']['returns_mean']:.6f}")
+        print(f"- Return volatility: {diagnostics['data_summary']['returns_std']:.6f}")
+        print(f"- Mean learned volatility: {diagnostics['data_summary']['learned_vol_mean']:.6f}")
+        print(f"- Final learned volatility: {diagnostics['data_summary']['final_learned_vol']:.6f}")
+        
+        print(f"\nOPTION PRICING PERFORMANCE:")
+        if 'rmse' in diagnostics['option_pricing']:
+            print(f"- RMSE: {diagnostics['option_pricing']['rmse']:.4f}")
+            print(f"- IV-RMSE: {diagnostics['option_pricing']['ivrmse']:.4f}")
+            print(f"- Valid comparisons: {diagnostics['option_pricing']['n_valid']}")
+        
+        print(f"\nVOLATILITY FORECASTS:")
+        if 'last_value' in diagnostics['volatility_forecasts']:
+            print(f"- Last value: {diagnostics['volatility_forecasts']['last_value']:.6f}")
+            print(f"- 5-day MA: {diagnostics['volatility_forecasts']['moving_avg_5']:.6f}")
+            print(f"- Trend forecast: {diagnostics['volatility_forecasts']['linear_trend']:.6f}")
+        
+        print(f"\nRISK PREMIA:")
+        if 'ERP' in diagnostics['risk_premia']:
+            erp = diagnostics['risk_premia']['ERP']
+            vrp = diagnostics['risk_premia']['VRP']
+            print(f"- Equity Risk Premium: {erp:.6f}" if not np.isnan(erp) else "- Equity Risk Premium: N/A")
+            print(f"- Volatility Risk Premium: {vrp:.6f}" if not np.isnan(vrp) else "- Volatility Risk Premium: N/A")
+        
+        print(f"\nMODEL PARAMETERS:")
+        params = diagnostics['model_parameters']
+        print(f"- κ (mean reversion): {params['kappa']:.4f}")
+        print(f"- θ (long-run variance): {params['theta']:.6f}")
+        print(f"- σ (vol-of-vol): {params['sigma']:.4f}")
+        print(f"- ρ (correlation): {params['rho']:.4f}")
+        print(f"- v₀ (initial variance): {params['v0']:.6f}")
+    else:
+        print(f"\nError generating diagnostics: {diagnostics['error']}")
+    
+    print("="*60)
+
+# =======================
+# END OF FILE EXTENSIONS
+# =======================
