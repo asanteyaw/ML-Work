@@ -68,3 +68,6 @@ logs/
 # Temporary files
 tmp/
 temp/
+
+.cache/
+**/.cache/
